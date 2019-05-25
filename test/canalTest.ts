@@ -22,6 +22,7 @@ describe('Suscripcion a Canal', () => {
         canal.subscribirse(usuario);
         expect(canal.subscribirse(usuario)).to.equal(false);
     });
+    
 
 });
 
