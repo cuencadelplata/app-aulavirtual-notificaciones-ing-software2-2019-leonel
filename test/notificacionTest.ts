@@ -24,8 +24,16 @@ describe('Notificacion', () => {
        let notificacion = new Notificacion('Titulo','Descripcion',12345,fecha,'Cristian');
        notificacion.cambiarVisto;
        expect(notificacion.getVisto()).to.equal(false);
+         
+     }); 
 
-    }); 
-        
+     it('Test Fecha Formateada', () => {
+    
+        var fecha = moment('2016-01-01');
+        let notificacion = new Notificacion('Titulo','Descripcion',12345,fecha,'Cristian');
+        expect(notificacion.getFechaFormateada()).to.equal('2016-01-01');
+         
+      });
+    
 });
 
