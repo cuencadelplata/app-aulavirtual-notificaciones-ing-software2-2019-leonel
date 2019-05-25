@@ -7,13 +7,13 @@ export class Notificacion {
     private visto: boolean;
     private remitente: String;
 
-    constructor(titulo: String, descripcion: String, id: number, fecha: String, visto: boolean, remitente: String ) {
+    constructor(titulo: String, descripcion: String, id: number, fecha: String, remitente: String ) {
        
         this.setTitulo(titulo);
         this.setDescripcion(descripcion);
         this.setId(id);
         this.setFecha(fecha);
-        this.setVisto(visto);
+        this.setVisto(false);
         this.setRemitente(remitente);
         
     }
