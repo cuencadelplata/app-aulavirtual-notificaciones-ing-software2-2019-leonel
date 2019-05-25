@@ -1,12 +1,34 @@
-import {Notificacion} from './Notificacion';
+import { Notificacion } from './Notificacion';
+import { Usuario } from './Usuario';
 
 export class Canal {
 
-    private usuarios: Array<string>;
-    private contenedorNotif: string;
+    private usuarios: Array<Usuario>;
+    private contenedorNotificacion: Notificacion;
 
     constructor(){
+        this.usuarios = [];
+    }
 
+    private setUsuarios(usuarios:Array<Usuario>) {
+        this.usuarios = usuarios;
+    }
+
+    /**
+     * getUsuarios
+     */
+    public getUsuarios():Array<Usuario> {
+        return this.usuarios;
+    }
+
+    private setContenedorNotificacion(notificacion: Notificacion) {
+        this.contenedorNotificacion = notificacion;
+    }
+    /**
+     * getContenedorNotificacion
+     */
+    public getContenedorNotificacion():Notificacion {
+        return this.contenedorNotificacion;
     }
 
     /**
@@ -28,7 +50,7 @@ export class Canal {
     /**
      * subscribirse
      */
-    public subscribirse(usuario: string) {
+    public subscribirse(usuario:Usuario) {
         /* Un usuario que se subscribe a un canal para recibir notificaciones*/
     
     }
@@ -36,7 +58,7 @@ export class Canal {
     /**
      * desuscribirse
      */
-    public desuscribirse() {
+    public desuscribirse(usuario: Usuario) {
         /* Usuario que se desuscribe del canal para dejar de recibir notificaciones */
     
     }
