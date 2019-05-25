@@ -7,7 +7,7 @@ export class Usuario {
         
         this.setNombre(nombre);
         this.setDni(dni);
-        
+        this.setNotificaciones(new Array<Notificacion>());
     }
 
     private setNombre (nombre : String) {
@@ -32,7 +32,7 @@ export class Usuario {
    
     }
    
-    public getNotifiaciones(): Array<Notificacion>{
+    public getNotificaciones(): Array<Notificacion>{
    
         return this.notificaciones;
    
@@ -43,5 +43,5 @@ export class Usuario {
         this.notificaciones.push(notificacion);
 
     }
-   
+
 }
