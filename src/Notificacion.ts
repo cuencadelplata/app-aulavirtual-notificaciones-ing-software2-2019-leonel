@@ -1,13 +1,15 @@
+import moment = require("moment");
 export class Notificacion {
     
     private titulo: String
     private descripcion: String;
     private id: number;
-    private fecha: String;
+    private fecha: moment.Moment;
     private visto: boolean;
     private remitente: String;
 
-    constructor(titulo: String, descripcion: String, id: number, fecha: String, remitente: String ) {
+    
+    constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String ) {
        
         this.setTitulo(titulo);
         this.setDescripcion(descripcion);
@@ -42,11 +44,11 @@ export class Notificacion {
         return this.id;
     }
 
-    private setFecha (fecha : String) {
+    private setFecha (fecha : moment.Moment) {
         this.fecha = fecha;
     }
      
-    public getFecha() : String {
+    public getFecha() : moment.Moment {
         return this.fecha;
     }
 
