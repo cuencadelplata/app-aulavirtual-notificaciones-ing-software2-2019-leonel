@@ -45,21 +45,21 @@ export class Usuario {
 
     }
 
-    public mostrar(fecha? : moment.Moment, remitente? : String): number{
+    public mostrar(fecha? : String, remitente? : String): number{
         var i = 0;
-       /*if(fecha != undefined ){
+        if(fecha != undefined ){
             console.log("\t\tSin remitente y Con fecha");
             for (let numero of this.getNotificaciones()){
 
-                if(numero.getFecha() == fecha){
+                if(numero.getFechaFormateada() == fecha){
                     i += 1;
                     console.log("\t\t* Notificacion n° " + i + " *");
-                    console.log( "Fecha: " + numero.getFecha() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
+                    console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
                 }
                 
             }
             return 1;
-        }*/
+        }
         if(remitente != undefined ){
             console.log("\t\tCon remitente y sin fecha");
             for (let numero of this.getNotificaciones()){
@@ -67,7 +67,7 @@ export class Usuario {
                 if(numero.getRemitente() == remitente){
                     i += 1;
                     console.log("\t\t* Notificacion n° " + i + " *");
-                    console.log( /*"Fecha: " + numero.getFecha() +*/ " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
+                    console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
                 }
                 
             }   
@@ -78,7 +78,7 @@ export class Usuario {
             for (let numero of this.getNotificaciones()){
             i += 1;
             console.log("\t\t* Notificacion n° " + i + " *");
-            console.log( /*"Fecha: " + numero.getFecha() + */" | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
+            console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
             }
 
             return 3;

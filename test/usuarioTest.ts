@@ -48,4 +48,22 @@ describe('Usuario', () => {
         expect(usuario.getNotificaciones().length).to.equal(3);
         expect(usuario.mostrar(null,"Agustín Aguirre Ruíz Díaz.")).to.equal(2);
     }); 
+    it('Test Filtrar por Fecha', () => {
+    
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
+        var fecha1 = moment('2016-01-01');
+        var fecha2 = moment('2016-02-02');
+        let notificacion1 = new Notificacion('Esta es un título1.','Esto es una descripción1.',123,fecha1,'Agustín Aguirre Ruíz Díaz.');
+        let notificacion3 = new Notificacion('Esta es un título3.','Esto es una descripción3.',123,fecha1,'Agustín Aguirre Ruíz Díaz.');
+        let notificacion2 = new Notificacion('Esta es un título2.','Esto es una descripción2.',456,fecha2,'Nombre de Remitente2.');
+
+        
+
+        usuario.agregarNotificacion(notificacion1);        
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+
+        expect(usuario.getNotificaciones().length).to.equal(3);
+        expect(usuario.mostrar("2016-01-01",null)).to.equal(1);
+    }); 
 });
