@@ -50,9 +50,20 @@ export class Canal {
     /**
      * subscribirse
      */
-    public subscribirse(usuario:Usuario) {
+    public subscribirse(newUser:Usuario):boolean {
         /* Un usuario que se subscribe a un canal para recibir notificaciones*/
-    
+        let usuarios = this.getUsuarios();
+        let existe = false;
+        usuarios.forEach(element => {
+            if (element.getDni() == newUser.getDni()){
+                existe = true;
+            }
+        }); 
+        if(existe){
+            return false;
+        }
+        this.getUsuarios().push(newUser);
+        return true;
     }
 
     /**
