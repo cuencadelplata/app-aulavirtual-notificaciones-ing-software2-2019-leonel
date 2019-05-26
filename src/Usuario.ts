@@ -104,4 +104,16 @@ export class Usuario {
 
     }
 
+    public eliminar(id : number){
+
+        var i;
+        for (i = 0; i < this.notificaciones.length; i++){
+            if (this.notificaciones[i].getId() == id ){
+                this.notificaciones.splice(i,1);
+            }
+        }
+
+
+    }
+
 }
