@@ -38,7 +38,7 @@ export class Notificacion{
     private setId (id : number) {
         this.id = id;
     }
-     
+    
     public getId() : number {
         return this.id;
     }
@@ -69,11 +69,11 @@ export class Notificacion{
 
     public cambiarVisto() {
         
-        this.setVisto (true);
+        this.setVisto (!this.getVisto());
     
     }
     
-    public getFechaFormateada() {
+    public getFechaFormateada() : String{
             
         return this.fecha.format('YYYY-MM-DD');
     
