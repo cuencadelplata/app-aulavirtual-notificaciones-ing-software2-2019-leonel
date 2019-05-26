@@ -23,7 +23,7 @@ export class ContenedorNotif{
         return this.notificaciones;
     }
 
-    agregarNotif(notificaion: Notificacion){
+    agregarNotificacion(notificaion: Notificacion){
         this.setNotificacion(notificaion);
     }
 }

@@ -9,7 +9,7 @@ describe('Almacenar notificaciones', () => {
         var fecha = moment('2016-01-01');
         let contenedorNotificacion = new ContenedorNotif();
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
-        contenedorNotificacion.agregarNotif(notificacion);
+        contenedorNotificacion.agregarNotificacion(notificacion);
         expect(contenedorNotificacion.getNotificacion().length).to.equal(1);
 
     }); 
@@ -18,7 +18,7 @@ describe('Almacenar notificaciones', () => {
         var fecha = moment('2016-01-01');
         let contenedorNotificacion = new ContenedorNotif();
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
-        contenedorNotificacion.agregarNotif(notificacion);
+        contenedorNotificacion.agregarNotificacion(notificacion);
         expect(contenedorNotificacion.getNotificacion().length).to.not.equal(2);
 
     }); 

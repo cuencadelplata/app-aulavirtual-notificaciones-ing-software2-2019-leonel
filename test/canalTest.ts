@@ -1,6 +1,10 @@
 import { Canal } from '../src/Canal';
 import { Usuario } from '../src/Usuario';
 import { expect } from 'chai';
+import { ContenedorNotif } from '../src/ContenedorNotificacion';
+import { Notificacion } from '../src/Notificacion';
+import moment = require("moment");
+
 
 describe('Crear Canal', () => {
     it('Canal not null', () => {
@@ -36,4 +40,22 @@ describe('Desuscricion del Canal', () => {
     });
 
 });
-
+    
+describe('Repartir Notificaciones', () => {
+    it('Usuario que no es remitente recibe la notificacion', () => {
+        var contenedorNoti
+        var fecha = moment('2016-01-01');
+               
+        let canal = new Canal();
+    
+            canal.subscribirse(new Usuario('Usuario',1));
+    
+        let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Augusto Portillo');
+        canal.repartirNotificacion(notificacion);
+        canal.getUsuarios().forEach(user => {
+            expect(user.getNotificaciones().length).to.equals(1);
+        })
+           
+    });
+    
+});
