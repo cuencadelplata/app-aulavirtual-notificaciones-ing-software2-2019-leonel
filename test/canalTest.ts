@@ -22,8 +22,18 @@ describe('Suscripcion a Canal', () => {
         canal.subscribirse(usuario);
         expect(canal.subscribirse(usuario)).to.equal(false);
     });
-    
 
 });
+describe('Desuscricion del Canal', () => {
+    it('Usuario se Desuscribe a Canal', () => {
+        let canal = new Canal();
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        let usuario2 = new Usuario('Usuario2', 12345678);
+        canal.subscribirse(usuario);
+        canal.subscribirse(usuario2);
+        canal.desuscribirse(usuario);
+        expect(canal.getUsuarios().length).to.equal(1);
+    });
 
+});
 
