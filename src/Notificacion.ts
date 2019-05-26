@@ -8,7 +8,7 @@ export class Notificacion {
     private visto: boolean;
     private remitente: String;
 
-    
+
     constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String ) {
        
         this.setTitulo(titulo);
@@ -72,8 +72,12 @@ export class Notificacion {
 
         this.setVisto (true);
     }
+    public getFechaFormateada(){
+        
+        return this.fecha.format('YYYY-MM-DD');
+    }
 
-    
+
     
 
 
