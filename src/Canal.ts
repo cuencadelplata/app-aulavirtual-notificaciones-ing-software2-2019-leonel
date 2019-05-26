@@ -1,13 +1,15 @@
-import { Notificacion } from './Notificacion';
+import { ContenedorNotif } from './contenedorNotificacion';
 import { Usuario } from './Usuario';
+import { Notificacion } from './Notificacion';
 
 export class Canal {
 
     private usuarios: Array<Usuario>;
-    private contenedorNotificacion: Notificacion;
+    private contenedorNotificacion: ContenedorNotif;
 
     constructor(){
         this.usuarios = [];
+        this.contenedorNotificacion = ContenedorNotif.getInstance();
     }
 
     private setUsuarios(usuarios:Array<Usuario>) {
@@ -21,23 +23,29 @@ export class Canal {
         return this.usuarios;
     }
 
-    private setContenedorNotificacion(notificacion: Notificacion) {
+    private setContenedorNotificacion(notificacion: ContenedorNotif) {
         this.contenedorNotificacion = notificacion;
     }
     /**
      * getContenedorNotificacion
      */
-    public getContenedorNotificacion():Notificacion {
+    public getContenedorNotificacion():ContenedorNotif {
         return this.contenedorNotificacion;
     }
 
     /**
      * repartirNotificacion
      */
-    public repartirNotificacion(notif:Notificacion) {
+    public repartirNotificacion(notif: Notificacion) {
+        this.usuarios.forEach((key, index) => {
+            if(key.getNombre() !=  notif.getRemitente()){
+                key.agregarNotificacion(notif);
+            }          
+        });
+
+        this.contenedorNotificacion.agregarNotificacion(notif);
         /* Logica para repartir notificacion a usuarios, si el usuario.nombre != remitente 
-            Ademas se envia a contenedor de notificaciones*/
-        
+            Ademas se envia a contenedor de notificaciones*/     
     }
     /**
      * actualizar
