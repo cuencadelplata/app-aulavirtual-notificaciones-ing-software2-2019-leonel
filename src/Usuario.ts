@@ -48,7 +48,7 @@ export class Usuario {
     public mostrar(fecha? : String, remitente? : String): number{
         var i = 0;
         if(fecha != undefined && remitente == undefined){
-            console.log("\t\tSin remitente y Con fecha");
+            console.log("\t\t\t\tSin remitente y Con fecha");
             for (let numero of this.getNotificaciones()){
 
                 if(numero.getFechaFormateada() == fecha){
@@ -61,7 +61,7 @@ export class Usuario {
             return 1;
         }
         if(remitente != undefined && fecha == undefined){
-            console.log("\t\tCon remitente y sin fecha");
+            console.log("\t\t\t\tCon remitente y sin fecha");
             for (let numero of this.getNotificaciones()){
 
                 if(numero.getRemitente() == remitente){
@@ -74,7 +74,7 @@ export class Usuario {
             return 2;
         }
         if (remitente == undefined && fecha == undefined){
-            console.log("\t\tSin remitente y sin fecha");
+            console.log("\t\t\t\tSin remitente y sin fecha");
             for (let numero of this.getNotificaciones()){
             i += 1;
             console.log("\t\t* Notificacion n° " + i + " *");
@@ -85,7 +85,7 @@ export class Usuario {
         }
         
         if (remitente != undefined && fecha != undefined){
-            console.log("\t\tCon remitente y Con fecha");
+            console.log("\t\t\t\tCon remitente y Con fecha");
             for (let numero of this.getNotificaciones()){
                 if(numero.getRemitente() == remitente && numero.getFechaFormateada() == fecha){
                     i += 1;
