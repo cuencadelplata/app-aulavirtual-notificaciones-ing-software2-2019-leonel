@@ -8,7 +8,7 @@ export class ContenedorNotif{
         this.notificaciones = [];
     }
 
-    static getInstance(){
+    static getInstance(): ContenedorNotif{
         if(!ContenedorNotif.instance){
             ContenedorNotif.instance = new ContenedorNotif();
         }
@@ -19,11 +19,11 @@ export class ContenedorNotif{
         this.notificaciones.push(notificacion);
     }
 
-    getNotificacion(){
+    getNotificaciones(): Array<Notificacion>{
         return this.notificaciones;
     }
 
-    agregarNotificacion(notificaion: Notificacion){
-        this.setNotificacion(notificaion);
+    agregarNotificacion(notificacion: Notificacion){
+        this.setNotificacion(notificacion);
     }
 }

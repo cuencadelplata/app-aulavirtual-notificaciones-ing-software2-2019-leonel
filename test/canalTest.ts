@@ -48,7 +48,7 @@ describe('Repartir Notificaciones', () => {
     });
 
     it('Usuario que es remitente no recibe la notificacion', () => {
-        var contenedorNoti
+     
         var fecha = moment('2016-01-01');
                
         let canal = new Canal();
@@ -60,6 +60,21 @@ describe('Repartir Notificaciones', () => {
         canal.getUsuarios().forEach(user => {
             expect(user.getNotificaciones().length).to.equals(0);
         })
+           
+    });
+
+    it('Contenedor de Notificaciones almacena notificaciones', () => {
+       
+        var fecha = moment('2016-01-01');
+               
+        let canal = new Canal();
+    
+    
+    
+        let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Schleicher Leonel');
+        canal.repartirNotificacion(notificacion);
+        expect(canal.getContenedorNotificacion().getNotificaciones().length).to.equals(3);
+        
            
     });
 
