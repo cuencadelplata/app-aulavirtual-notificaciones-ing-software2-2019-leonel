@@ -77,9 +77,17 @@ export class Canal {
     /**
      * desuscribirse
      */
-    public desuscribirse(usuario: Usuario) {
+    public desuscribirse(usuario: Usuario):boolean {
         /* Usuario que se desuscribe del canal para dejar de recibir notificaciones */
-    
+        let exito = false;
+        // let index = null;
+        this.getUsuarios().forEach((item, index) => {
+            if (item.getDni() === usuario.getDni()) {
+                this.getUsuarios().splice(index,1);
+                exito = true;
+            }
+        });;
+        return exito;
     }
 
 }
