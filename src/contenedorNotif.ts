@@ -4,7 +4,7 @@ export class ContenedorNotif{
     notificaciones: Array<Notificacion>
     private static instance: ContenedorNotif;
 
-    constructor(){
+    private constructor(){
         this.notificaciones = [];
     }
 
@@ -15,7 +15,7 @@ export class ContenedorNotif{
         return ContenedorNotif.instance;
     }
 
-    setNotificacion(notificacion: Notificacion){
+    private setNotificacion(notificacion: Notificacion){
         this.notificaciones.push(notificacion);
     }
 

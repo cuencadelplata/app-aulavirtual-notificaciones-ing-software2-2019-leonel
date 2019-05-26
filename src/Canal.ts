@@ -1,4 +1,4 @@
-import { ContenedorNotif } from './contenedorNotificacion';
+import { ContenedorNotif } from './ContenedorNotif';
 import { Usuario } from './Usuario';
 import { Notificacion } from './Notificacion';
 

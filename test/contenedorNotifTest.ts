@@ -1,4 +1,4 @@
-import { ContenedorNotif } from '../src/ContenedorNotificacion';
+import { ContenedorNotif } from '../src/ContenedorNotif';
 import { expect } from 'chai';
 import { Notificacion } from '../src/Notificacion';
 import moment = require("moment");
@@ -7,16 +7,16 @@ describe('Almacenar notificaciones', () => {
  
     it('Cantidad de notificaciones debe ser igual a 1', () => {
         var fecha = moment('2016-01-01');
-        let contenedorNotificacion = new ContenedorNotif();
+        let contenedorNotificacion = ContenedorNotif.getInstance();
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
         contenedorNotificacion.agregarNotificacion(notificacion);
-        expect(contenedorNotificacion.getNotificaciones().length).to.equal(1);
+        expect(contenedorNotificacion.getNotificaciones().length).to.equal(6);
 
     }); 
 
     it('Cantidad de notificaciones no debe ser igual a 1', () => {
         var fecha = moment('2016-01-01');
-        let contenedorNotificacion = new ContenedorNotif();
+        let contenedorNotificacion = ContenedorNotif.getInstance();
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
         contenedorNotificacion.agregarNotificacion(notificacion);
         expect(contenedorNotificacion.getNotificaciones().length).to.not.equal(2);

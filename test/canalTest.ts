@@ -1,7 +1,6 @@
 import { Canal } from '../src/Canal';
 import { Usuario } from '../src/Usuario';
 import { expect } from 'chai';
-import { ContenedorNotif } from '../src/ContenedorNotificacion';
 import { Notificacion } from '../src/Notificacion';
 import moment = require("moment");
 
