@@ -1,5 +1,5 @@
 import moment = require("moment");
-export class Notificacion {
+export class Notificacion{
     
     private titulo: String
     private descripcion: String;
@@ -8,8 +8,7 @@ export class Notificacion {
     private visto: boolean;
     private remitente: String;
 
-
-    constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String ) {
+    constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String){
        
         this.setTitulo(titulo);
         this.setDescripcion(descripcion);
@@ -68,13 +67,16 @@ export class Notificacion {
         return this.remitente;
     }
 
-    public cambiarVisto(){
-
-        this.setVisto (true);
-    }
-    public getFechaFormateada(){
+    public cambiarVisto() {
         
+        this.setVisto (true);
+    
+    }
+    
+    public getFechaFormateada() {
+            
         return this.fecha.format('YYYY-MM-DD');
+    
     }
 
 
