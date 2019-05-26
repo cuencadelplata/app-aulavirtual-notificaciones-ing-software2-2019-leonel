@@ -26,6 +26,15 @@ describe('Suscripcion a Canal', () => {
         canal.subscribirse(usuario);
         expect(canal.subscribirse(usuario)).to.equal(false);
     });
+    it('Usuario Nuevo debe tenern notificaciones de contenedorNotif', () => {
+        let canal = new Canal();
+        canal.repartirNotificacion(new Notificacion('Titulo', 'Descripcion', 213, moment('2016-01-01'), 'Schleicher Leonel'));
+        canal.repartirNotificacion(new Notificacion('Titulo2', 'Descripcion2', 2134, moment(), 'Schleicher Leonel'));
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        canal.subscribirse(usuario);
+        expect(canal.getUsuarios()[0].getNotificaciones().length).to.equal(2);
+    });
+
 
 });
 describe('Desuscricion del Canal', () => {
@@ -53,7 +62,7 @@ describe('Repartir Notificaciones', () => {
         let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Augusto Portillo');
         canal.repartirNotificacion(notificacion);
         canal.getUsuarios().forEach(user => {
-            expect(user.getNotificaciones().length).to.equals(1);
+            expect(user.getNotificaciones().length).to.equals(3);
         })
            
     });
@@ -69,7 +78,7 @@ describe('Repartir Notificaciones', () => {
         let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Schleicher Leonel');
         canal.repartirNotificacion(notificacion);
         canal.getUsuarios().forEach(user => {
-            expect(user.getNotificaciones().length).to.equals(0);
+            expect(user.getNotificaciones().length).to.equals(3);
         })
            
     });
@@ -84,7 +93,7 @@ describe('Repartir Notificaciones', () => {
     
         let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Schleicher Leonel');
         canal.repartirNotificacion(notificacion);
-        expect(canal.getContenedorNotificacion().getNotificaciones().length).to.equals(3);
+        expect(canal.getContenedorNotificacion().getNotificaciones().length).to.equals(5);
         
            
     });

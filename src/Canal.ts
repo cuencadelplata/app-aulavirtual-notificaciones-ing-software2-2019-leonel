@@ -50,9 +50,12 @@ export class Canal {
     /**
      * actualizar
      */
-    public actualizar() {
+    private actualizar(usuario:Usuario): Usuario {
         /* Cuando ingresa un usuario nuevo, este metodo le pasa todos las notificaciones */
-        
+        this.getContenedorNotificacion().getNotificaciones().forEach(item => {
+            usuario.agregarNotificacion(item);
+        });
+        return usuario;
     }
 
     /**
@@ -70,6 +73,7 @@ export class Canal {
         if(existe){
             return false;
         }
+        newUser = this.actualizar(newUser);
         this.getUsuarios().push(newUser);
         return true;
     }
