@@ -16,10 +16,22 @@ describe("Leer RSS y enviar notificaciones", () => {
         var canal = new Canal();
         var usuario = new Usuario("Usuario", 12345567);
         canal.subscribirse(usuario);
-        
+
         (async () => {
             publisher.crearYenviarNotificacion(canal);
             expect(usuario.getNotificaciones().length).to.be.greaterThan(0);
         }) ();
     });
+
+    it("Solo enviar notificaciones a traves de canal", ()=> {
+        var publisher = new Publisher();
+        var canal = new Canal();
+        var usuario = new Usuario("Usuario", 12345567);
+        
+        (async () => {
+            publisher.crearYenviarNotificacion(canal);
+            expect(usuario.getNotificaciones().length).to.be.equal(0);
+        }) ();
+    });
+
 });
