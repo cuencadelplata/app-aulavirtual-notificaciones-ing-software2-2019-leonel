@@ -25,8 +25,10 @@ export class Publisher
 
     public async crearYenviarNotificacion( canal : Canal)
     {
+        // Obtener mensajes del feed rss
         let datos = await parsear("http://virtualucp.edu.ar/cursos/rss/file.php?file=/154678/a1329bd266c85f1c5aa024a6ba396df5/mod_forum/11489/rss.xml");
         
+        // crear notificaciones por cada mensaje
         datos.items.slice().reverse().forEach(mensaje => {
 
           var nombre = mensaje.content.slice(4, mensaje.content.indexOf("."));
@@ -34,10 +36,12 @@ export class Publisher
           var id =  Number(mensaje.link.slice(mensaje.link.length - 5));
           var fecha = mensaje.pubDate.slice(5);
 
+          // Comprobar que este mensaje no haya sido notificacio anteriormente
           if(this.getUltimoMensaje() < id)
           {
             var noti = new Notificacion(mensaje.title, descripcion, id, moment(fecha), nombre );
             canal.repartirNotificacion(noti);
+            // Actualizar ultimo mensaje notificado
             this.setUltimoMensaje(id);
           }
         });
