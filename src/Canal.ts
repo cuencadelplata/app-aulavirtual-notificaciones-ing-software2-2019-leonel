@@ -1,6 +1,6 @@
-import { ContenedorNotif } from './ContenedorNotif';
-import { Usuario } from './Usuario';
-import { Notificacion } from './Notificacion';
+import { ContenedorNotif } from '../src/ContenedorNotif';
+import { Usuario } from '../src/Usuario';
+import { Notificacion } from '../src/Notificacion';
 
 export class Canal {
 
