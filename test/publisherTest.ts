@@ -34,4 +34,18 @@ describe("Leer RSS y enviar notificaciones", () => {
         }) ();
     });
 
+    it("No se deben enviar notifiaciones que ya fueron enviadas", ()=> {
+        var publisher = new Publisher();
+        var canal = new Canal();
+        var usuario = new Usuario("Usuario", 12345567);
+        canal.subscribirse(usuario);
+        
+        (async () => {
+            // envio n°1
+            publisher.crearYenviarNotificacion(canal);
+            // envio n°2
+            publisher.crearYenviarNotificacion(canal);
+            expect(usuario.getNotificaciones().length).to.be.greaterThan(10);
+        }) ();
+    });
 });
