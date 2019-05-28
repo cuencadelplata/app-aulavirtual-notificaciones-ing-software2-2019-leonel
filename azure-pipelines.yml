@@ -23,8 +23,9 @@ steps:
     npm install --save-dev mocha chai
     npm install --save-dev ts-node typescript
     npm install --save-dev @types/chai @types/mocha
-  displayName: 'npm install mocha chai / ts-node typescript / @types '
+    npm install --save rss-parser
+  displayName: 'npm install mocha chai / ts-node typescript / @types / rss-parser'
 
 - script: |
-    npm test
+    npm run test
   displayName: 'npm test'
