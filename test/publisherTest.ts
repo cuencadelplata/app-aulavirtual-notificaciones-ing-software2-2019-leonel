@@ -2,6 +2,7 @@ import { Publisher } from "../src/Publisher";
 import { expect } from 'chai';
 import { Canal } from "../src/Canal";
 import { Usuario } from "../src/Usuario";
+import { CANCELLED } from "dns";
 
 describe('Crear Publisher', () => {
     it('Creacion correcta', () => {
@@ -30,6 +31,20 @@ describe("Leer RSS y enviar notificaciones", () => {
         
         (async () => {
             publisher.crearYenviarNotificacion(canal);
+            expect(usuario.getNotificaciones().length).to.be.equal(0);
+        }) ();
+    });
+
+    it("Usuarios de otros canales no deben recibir notificaciones", ()=> {
+        var publisher = new Publisher();
+        var canal1 = new Canal();
+        var canal2 = new Canal();
+        var usuario = new Usuario("Usuario", 12345567);
+        
+        canal1.subscribirse(usuario);
+
+        (async () => {
+            publisher.crearYenviarNotificacion(canal2);
             expect(usuario.getNotificaciones().length).to.be.equal(0);
         }) ();
     });
