@@ -20,5 +20,11 @@ steps:
   displayName: 'npm install'
 
 - script: |
+    npm install --save-dev mocha chai
+    npm install --save-dev ts-node typescript
+    npm install --save-dev @types/chai @types/mocha
+  displayName: 'npm install mocha chai / ts-node typescript / @types '
+
+- script: |
     npm test
   displayName: 'npm test'
