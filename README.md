@@ -1,5 +1,5 @@
 # app-aulavirtual-notificaciones-ing-software2-2019-repo
-Aplicacion de notificacuines para ingenieria de sofware 2
+Aplicacion de notificaciones para ingenieria de sofware 2
 
 --Comandos para la instalacion de modulos--
 
