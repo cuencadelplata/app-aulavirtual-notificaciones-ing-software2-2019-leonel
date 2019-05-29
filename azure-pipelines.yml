@@ -17,5 +17,17 @@ steps:
 
 - script: |
     npm install
-    npm run build
-  displayName: 'npm install and build'
+  displayName: 'npm install'
+
+- script: |
+    npm install --save-dev mocha chai
+    npm install ts-node --save-dev
+    npm install typescript -g 
+    npm install typescript --save-dev
+    npm install --save-dev @types/chai @types/mocha
+    npm install --save rss-parser
+  displayName: 'npm install mocha chai / ts-node typescript / @types / rss-parser'
+
+- script: |
+    npm run test
+  displayName: 'npm test'
