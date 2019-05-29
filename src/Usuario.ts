@@ -1,5 +1,6 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
+import { Canal } from './Canal';
 export class Usuario {
     private nombre: String;
     private dni: number;
@@ -43,6 +44,16 @@ export class Usuario {
 
         this.notificaciones.push(notificacion);
 
+    }
+
+    public subscribirse(canal : Canal)
+    {
+        canal.subscribirse(this);
+    }
+
+    public desubscribirse(canal : Canal)
+    {
+        canal.desuscribirse(this);    
     }
 
     public mostrar(fecha? : String, remitente? : String): number{
