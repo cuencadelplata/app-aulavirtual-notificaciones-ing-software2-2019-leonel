@@ -26,4 +26,9 @@ export class ContenedorNotif{
     agregarNotificacion(notificacion: Notificacion){
         this.setNotificacion(notificacion);
     }
+
+    public reset()
+    {
+        this.notificaciones = [];
+    }
 }

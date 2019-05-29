@@ -2,6 +2,7 @@ import { Notificacion } from '../src/Notificacion';
 import { Usuario } from '../src/Usuario';
 import { expect } from 'chai';
 import moment = require("moment");
+import { Canal } from '../src/Canal';
 
 describe('Usuario', () => {
  
@@ -135,5 +136,28 @@ describe('Usuario', () => {
         usuario.eliminar(191911);
         expect(usuario.getNotificaciones().length).to.equal(4);
         expect(usuario.getNotificaciones()[3].getId()).to.not.equal(191911);
+    });
+
+    it("Subscribir usuario a un canal", () => {
+        let usuario = new Usuario("Persona 1", 32232323);
+        let canal = new Canal();
+
+        usuario.subscribirse(canal);
+
+        expect(canal.getUsuarios().length).to.equal(1);
+    });
+
+    
+    it("Subscribir usuario a un canal", () => {
+        let usuario = new Usuario("Persona 1", 32232323);
+        let canal = new Canal();
+
+        usuario.subscribirse(canal);
+
+        expect(canal.getUsuarios().length).to.equal(1);
+
+        usuario.desubscribirse(canal);
+
+        expect(canal.getUsuarios().length).to.equal(0);
     });
 });

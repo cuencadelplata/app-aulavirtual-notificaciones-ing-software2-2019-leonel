@@ -1,6 +1,11 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
+<<<<<<< HEAD
 export class Usuario{
+=======
+import { Canal } from './Canal';
+export class Usuario {
+>>>>>>> 202a8bdb18c642d5b83eff0e854977ffb09f5af5
     private nombre: String;
     private dni: number;
     private notificaciones: Array<Notificacion>;
@@ -43,6 +48,16 @@ export class Usuario{
 
         this.notificaciones.push(notificacion);
 
+    }
+
+    public subscribirse(canal : Canal)
+    {
+        canal.subscribirse(this);
+    }
+
+    public desubscribirse(canal : Canal)
+    {
+        canal.desuscribirse(this);    
     }
 
     public mostrar(fecha? : String, remitente? : String): number{

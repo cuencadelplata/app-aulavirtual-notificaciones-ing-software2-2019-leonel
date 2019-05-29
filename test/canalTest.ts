@@ -3,6 +3,7 @@ import { Usuario } from '../src/Usuario';
 import { expect } from 'chai';
 import { Notificacion } from '../src/Notificacion';
 import moment = require("moment");
+import { ContenedorNotif } from '../src/ContenedorNotif';
 
 
 describe('Crear Canal', () => {
@@ -51,18 +52,20 @@ describe('Desuscricion del Canal', () => {
     
 describe('Repartir Notificaciones', () => {
     it('Usuario que no es remitente recibe la notificacion', () => {
-        var contenedorNoti
+    
         var fecha = moment('2016-01-01');
                
         let canal = new Canal();
+        let user = new Usuario('Usuario',1);
     
-            canal.subscribirse(new Usuario('Usuario',1));
+        canal.subscribirse(user);
+        user.eliminar(213);
+        user.eliminar(2134);
     
-        let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Augusto Portillo');
+        let notificacion = new Notificacion('Titulo','Descripcion',223,fecha,'Augusto Portillo');
         canal.repartirNotificacion(notificacion);
-        canal.getUsuarios().forEach(user => {
-            expect(user.getNotificaciones().length).to.equals(3);
-        })
+        expect(user.getNotificaciones().length).to.equals(1);
+      
            
     });
 
@@ -71,28 +74,29 @@ describe('Repartir Notificaciones', () => {
         var fecha = moment('2016-01-01');
                
         let canal = new Canal();
+        let user = new Usuario('Schleicher',1);
     
-            canal.subscribirse(new Usuario('Schleicher Leonel',1));
+        canal.subscribirse(user);
+        user.eliminar(213);
+        user.eliminar(2134);
+        user.eliminar(223);
     
-        let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Schleicher Leonel');
+        let notificacion = new Notificacion('Titulo','Descripcion',220,fecha,'Schleicher');
         canal.repartirNotificacion(notificacion);
-        canal.getUsuarios().forEach(user => {
-            expect(user.getNotificaciones().length).to.equals(3);
-        })
+        expect(user.getNotificaciones().length).to.equals(0);
+      
            
     });
 
-    it('Contenedor de Notificaciones almacena notificaciones', () => {
+    it('Cuando el canal reparte, tambien lo hace al contenedor', () => {
        
         var fecha = moment('2016-01-01');
-               
+        
         let canal = new Canal();
-    
-    
-    
+        canal.getContenedorNotificacion().reset();   
         let notificacion = new Notificacion('Titulo','Descripcion',213,fecha,'Schleicher Leonel');
         canal.repartirNotificacion(notificacion);
-        expect(canal.getContenedorNotificacion().getNotificaciones().length).to.equals(5);
+        expect(canal.getContenedorNotificacion().getNotificaciones().length).to.equals(1);
         
            
     });

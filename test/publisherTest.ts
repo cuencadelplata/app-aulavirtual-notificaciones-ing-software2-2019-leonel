@@ -18,7 +18,7 @@ describe("Leer RSS y enviar notificaciones", () => {
         canal.subscribirse(usuario);
 
         await publisher.crearYenviarNotificacion(canal);
-        expect(usuario.getNotificaciones().length).to.be.greaterThan(0);
+        expect(usuario.getNotificaciones().length).to.be.greaterThan(5);
     });
 
     it("Solo enviar notificaciones a traves de canal", async ()=> {
@@ -36,12 +36,13 @@ describe("Leer RSS y enviar notificaciones", () => {
         let canal2 = new Canal();
         let usuario1 = new Usuario("Usuario", 12345567);
         let usuario2 = new Usuario("Usuario2", 76544321);
-
+        canal1.getContenedorNotificacion().reset();
         canal1.subscribirse(usuario1);
         canal2.subscribirse(usuario2);
 
+    
         await publisher.crearYenviarNotificacion(canal2);
-        expect(usuario1.getNotificaciones().length).to.equal(29);
+        expect(usuario1.getNotificaciones().length).to.equal(0);
     });
 
     it("No se deben enviar notifiaciones que ya fueron enviadas", async ()=> {
@@ -55,5 +56,23 @@ describe("Leer RSS y enviar notificaciones", () => {
         // envio n°2
         await publisher.crearYenviarNotificacion(canal);
         expect(usuario.getNotificaciones().length).to.be.greaterThan(10);
+    });
+
+    
+    it("No se deben enviar notifiaciones que fueron eliminadas", async ()=> {
+        let publisher = new Publisher();
+        let canal = new Canal();
+        let usuario = new Usuario("Usuario", 12345567);
+        canal.getContenedorNotificacion().reset();
+        usuario.subscribirse(canal);
+        
+        // envio n°1
+        await publisher.crearYenviarNotificacion(canal);
+        expect(usuario.getNotificaciones().length).to.equal(11);
+        // envio n°2
+        usuario.mostrar();
+        usuario.eliminar(74075);
+        await publisher.crearYenviarNotificacion(canal);
+        expect(usuario.getNotificaciones().length).to.be.equal(10);
     });
 });

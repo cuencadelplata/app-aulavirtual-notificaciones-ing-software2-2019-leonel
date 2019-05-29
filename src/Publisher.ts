@@ -31,10 +31,15 @@ export class Publisher
         // crear notificaciones por cada mensaje
         datos.items.slice().reverse().forEach(mensaje => {
 
-          var nombre = mensaje.content.slice(4, mensaje.content.indexOf("."));
-          var descripcion = mensaje.content.slice(mensaje.content.indexOf("<p><p>")+6, mensaje.content.indexOf("</p></p>"));
-          var id =  Number(mensaje.link.slice(mensaje.link.length - 5));
-          var fecha = mensaje.pubDate.slice(5);
+          //Logica para parsear contenidos de mensajes
+          let contenido = mensaje.content.split(";");
+          let nombre = contenido[0].slice(4, contenido[0].lastIndexOf("."));
+          let aux1 = contenido[1].split(">");
+          let aux2 = aux1[2].split("<");
+          let descripcion = aux2[0];
+        
+          let id =  Number(mensaje.link.slice(mensaje.link.length - 5));
+          let fecha = mensaje.pubDate.slice(5);
 
           // Comprobar que este mensaje no haya sido notificacio anteriormente
           if(this.getUltimoMensaje() < id)
