@@ -7,18 +7,20 @@ describe('Almacenar notificaciones', () => {
     var contenedorNotificacion = ContenedorNotif.getInstance();
  
     it('Cantidad de notificaciones debe ser igual a 1', () => {
+        contenedorNotificacion.reset();
         var fecha = moment('2016-01-01');
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
         contenedorNotificacion.agregarNotificacion(notificacion);
-        expect(contenedorNotificacion.getNotificaciones().length).to.equal(6);
+        expect(contenedorNotificacion.getNotificaciones().length).to.equal(1);
 
     }); 
 
-    it('Cantidad de notificaciones no debe ser igual a 1', () => {
+    it('Cantidad de notificaciones no debe ser igual a 0', () => {
+        contenedorNotificacion.reset();
         var fecha = moment('2016-01-01');
         let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
         contenedorNotificacion.agregarNotificacion(notificacion);
-        expect(contenedorNotificacion.getNotificaciones().length).to.not.equal(2);
+        expect(contenedorNotificacion.getNotificaciones().length).to.not.equal(0);
 
     });
     
