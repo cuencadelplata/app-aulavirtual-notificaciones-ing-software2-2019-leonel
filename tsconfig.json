@@ -4,6 +4,7 @@
       "allowJs": true,
       "module": "commonjs",
       "outDir": "out",
-      "sourceMap": true
+      "sourceMap": true,
+      "moduleResolution": "node"
   }
 }
