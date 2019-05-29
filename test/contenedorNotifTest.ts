@@ -20,5 +20,14 @@ describe('Almacenar notificaciones', () => {
         contenedorNotificacion.agregarNotificacion(notificacion);
         expect(contenedorNotificacion.getNotificaciones().length).to.not.equal(2);
 
+    });
+    
+    it('ContenedorNotificacion debe resetear sus notificaciones', () => {
+        var fecha = moment('2016-01-01');
+        let notificacion = new Notificacion("esto es un titulo", "esto es una descripcion", 1, fecha,"soy el remitente");
+        contenedorNotificacion.agregarNotificacion(notificacion);
+        contenedorNotificacion.reset();
+        expect(contenedorNotificacion.getNotificaciones().length).to.equal(0);
+
     }); 
 });

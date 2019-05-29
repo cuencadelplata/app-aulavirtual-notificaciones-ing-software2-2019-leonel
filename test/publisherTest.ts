@@ -36,12 +36,13 @@ describe("Leer RSS y enviar notificaciones", () => {
         let canal2 = new Canal();
         let usuario1 = new Usuario("Usuario", 12345567);
         let usuario2 = new Usuario("Usuario2", 76544321);
-
+    
         canal1.subscribirse(usuario1);
         canal2.subscribirse(usuario2);
 
+    
         await publisher.crearYenviarNotificacion(canal2);
-        expect(usuario1.getNotificaciones().length).to.equal(29);
+        expect(usuario1.getNotificaciones().length).to.equal(0);
     });
 
     it("No se deben enviar notifiaciones que ya fueron enviadas", async ()=> {
