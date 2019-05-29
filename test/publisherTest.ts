@@ -36,7 +36,7 @@ describe("Leer RSS y enviar notificaciones", () => {
         let canal2 = new Canal();
         let usuario1 = new Usuario("Usuario", 12345567);
         let usuario2 = new Usuario("Usuario2", 76544321);
-    
+        canal1.getContenedorNotificacion().reset();
         canal1.subscribirse(usuario1);
         canal2.subscribirse(usuario2);
 
