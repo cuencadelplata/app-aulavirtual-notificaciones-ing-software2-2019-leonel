@@ -1,6 +1,6 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
-export class Usuario {
+export class Usuario{
     private nombre: String;
     private dni: number;
     private notificaciones: Array<Notificacion>;
