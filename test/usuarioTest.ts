@@ -143,7 +143,7 @@ describe('Usuario > Filtrar Notificaciones', () => {
         expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01').length).to.equal(0);
     });
 
-    it("Filtrar por fecha sin string fecha", () => {
+    it("Filtrar por fecha sin parametro fecha", () => {
         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
         var fecha1 = moment('2016-01-01');
         var fecha2 = moment('2016-02-02');
@@ -155,10 +155,11 @@ describe('Usuario > Filtrar Notificaciones', () => {
         usuario.agregarNotificacion(notificacion2);
         usuario.agregarNotificacion(notificacion3);
 
-        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").length).to.equal(1);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion1)).to.equal(false);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion2)).to.equal(false);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion3)).to.equal(false);
+        //console.log(usuario.mostrar(usuario.filtrarFecha(usuario.getNotificaciones(), "")));
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).length).to.equal(3);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion1)).to.equal(true);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion2)).to.equal(true);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion3)).to.equal(true);
     });
 
 });
