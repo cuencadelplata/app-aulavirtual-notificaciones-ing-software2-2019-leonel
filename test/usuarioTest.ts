@@ -207,7 +207,99 @@ describe('Usuario > Mostrar Notificaciones', () => {
         
     });
 
-
+    describe('Usuario > Filtrar Notificaciones', () => {
+        it('Test Filtrar por Texto sin Texto', () => {
+    
+            let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+            var fecha = moment('2016-01-01');
+            var fecha2 = moment('2016-02-02');
+            let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha2, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha, 'Julio Cesar Blanco.');
+    
+            usuario.agregarNotificacion(notificacion1);
+            usuario.agregarNotificacion(notificacion2);
+            usuario.agregarNotificacion(notificacion3);
+            expect(usuario.getNotificaciones().length).to.equal(3);
+            expect(usuario.filtrarTexto(usuario.getNotificaciones(),null).length).to.equal(0);
+        });
+        it('Test Filtrar por Texto con Remitente', () => {
+    
+           let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+           var fecha = moment('2016-01-01');
+    
+           let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 1111, fecha, 'Agustín Aguirre Ruíz Díaz.');
+           let notificacion2 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 2222, fecha, 'Agustín Aguirre Ruíz Díaz.');
+           let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción5.', 3333, fecha, 'Julio Cesar Blanco.');
+           let notificacion4 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 4444, fecha, 'Julio Cesar Blanco.');
+           let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha, 'Julio Cesar Blanco.');
+           usuario.agregarNotificacion(notificacion1);
+           usuario.agregarNotificacion(notificacion2);
+           usuario.agregarNotificacion(notificacion3);
+           usuario.agregarNotificacion(notificacion4);
+            usuario.agregarNotificacion(notificacion5);
+    
+            expect(usuario.getNotificaciones().length).to.equal(5);
+    
+            //expect(usuario.filtrarTexto(usuario.getNotificaciones(),'Agustín Aguirre Ruíz Díaz.').length).to.equal(2);
+            //expect(usuario.filtrarTexto(usuario.getNotificaciones(),'Esta es un título1.').length).to.equal(2);
+            expect(usuario.filtrarTexto(usuario.getNotificaciones(),"Julio Cesar Blanco.").length).to.equal(3);
+    
+           
+            
+           });
+           it('Test Filtrar por Texto con Descripción', () => {
+    
+            let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+            var fecha = moment('2016-01-01');
+    
+            let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 1111, fecha, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion2 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 2222, fecha, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción5.', 3333, fecha, 'Julio Cesar Blanco.');
+            let notificacion4 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 4444, fecha, 'Julio Cesar Blanco.');
+            let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción4.', 5555, fecha, 'Julio Cesar Blanco.');
+    
+            usuario.agregarNotificacion(notificacion1);
+            usuario.agregarNotificacion(notificacion2);
+            usuario.agregarNotificacion(notificacion3);
+            usuario.agregarNotificacion(notificacion4);
+            usuario.agregarNotificacion(notificacion5);
+    
+            expect(usuario.getNotificaciones().length).to.equal(5);
+    
+            expect(usuario.filtrarTexto(usuario.getNotificaciones(),'Esto es una descripción5.').length).to.equal(4);    
+            
+           });
+           it('Test Filtrar por Texto con Titulo', () => {
+    
+            let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+            var fecha = moment('2016-01-01');
+    
+            let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 1111, fecha, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion2 = new Notificacion('Esta es un título1.', 'Esto es una descripción5.', 2222, fecha, 'Agustín Aguirre Ruíz Díaz.');
+            let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción5.', 3333, fecha, 'Julio Cesar Blanco.');
+            let notificacion4 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 4444, fecha, 'Julio Cesar Blanco.');
+            let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha, 'Julio Cesar Blanco.');
+            usuario.agregarNotificacion(notificacion1);
+            usuario.agregarNotificacion(notificacion2);
+            usuario.agregarNotificacion(notificacion3);
+            usuario.agregarNotificacion(notificacion4);
+            usuario.agregarNotificacion(notificacion5);
+    
+            expect(usuario.getNotificaciones().length).to.equal(5);
+    
+            expect(usuario.filtrarTexto(usuario.getNotificaciones(),'Esta es un título1.').length).to.equal(2);
+           
+            
+           });
+        it('Test Filtrar por Texto sin Texto y con un arreglo Vacío', () => {
+    
+            let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+            
+            expect(usuario.getNotificaciones().length).to.equal(0);
+            expect(usuario.filtrarTexto(usuario.getNotificaciones(),null).length).to.equal(0);
+        });
+    });
 
  });
 
