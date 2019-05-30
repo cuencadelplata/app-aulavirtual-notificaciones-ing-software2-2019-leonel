@@ -57,6 +57,75 @@ export class Usuario {
         canal.desuscribirse(this);    
     }
 
+
+
+    public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
+
+        var arregloFecha = arreglo;
+
+        arregloFecha.forEach((numero, index) =>{
+            if(numero.getFechaFormateada() != fecha ){
+                    
+                arregloFecha.splice(index,1);;
+
+            }
+        });
+         
+        return arregloFecha;
+    
+    }
+    
+    public filtrarTexto(arreglo: Array<Notificacion>,texto: String): Array<Notificacion>{
+        
+        var arregloTexto = arreglo;
+
+        arregloTexto.forEach((numero, index) =>{
+            if(numero.getDescripcion() != texto || numero.getRemitente() != texto || numero.getTitulo() != texto){
+                    
+                arregloTexto.splice(index,1);;
+
+            }
+        });
+         
+        
+        
+        return arregloTexto;
+
+    }
+    
+    public filtrarVisto(arreglo: Array<Notificacion>,visto: boolean): Array<Notificacion>{
+
+
+        
+        var arregloVisto = arreglo;
+
+        arregloVisto.forEach((numero, index) =>{
+            if(numero.getVisto() != visto ){
+                    
+                arregloVisto.splice(index,1);;
+
+            }
+        });
+               
+        return arregloVisto;
+
+
+    }
+
+    public filtrar(fecha? : String , texto? : String , visto? : boolean ): Array<Notificacion>{
+
+        var arregloFiltrado = this.getNotificaciones();
+
+
+        arregloFiltrado = this.filtrarFecha(arregloFiltrado,fecha);
+        arregloFiltrado = this.filtrarTexto(arregloFiltrado,texto);
+        arregloFiltrado = this.filtrarVisto(arregloFiltrado,visto);
+
+        return arregloFiltrado;
+
+    }
+
+
     public mostrar(notificiones : Array<Notificacion>): string{
         let stringNotificaciones = "";
         
@@ -65,6 +134,7 @@ export class Usuario {
             notificiones.forEach((item, index )=> {
                 stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo() + " por " + item.getRemitente() + "\n";
             });
+
         }
         else {
             stringNotificaciones = "Sin Datos";
