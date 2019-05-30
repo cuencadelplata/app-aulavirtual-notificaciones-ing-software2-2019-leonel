@@ -93,21 +93,18 @@ export class Usuario {
     }
     
     public filtrarVisto(arreglo: Array<Notificacion>,visto: boolean): Array<Notificacion>{
-
-
         
-        var arregloVisto = arreglo;
+        var arregloVisto = [];
+        if(visto != undefined){
+            arreglo.forEach((numero, index) =>{
+                if(numero.getVisto() == visto ){
+                        
+                    arregloVisto.push(numero);;
 
-        arregloVisto.forEach((numero, index) =>{
-            if(numero.getVisto() != visto ){
-                    
-                arregloVisto.splice(index,1);;
-
-            }
-        });
-               
+                }
+            });
+        }    
         return arregloVisto;
-
 
     }
 
