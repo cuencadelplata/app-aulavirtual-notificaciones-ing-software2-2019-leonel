@@ -1,6 +1,7 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
 import { Canal } from './Canal';
+import { userInfo } from 'os';
 export class Usuario {
     private nombre: String;
     private dni: number;
@@ -125,64 +126,21 @@ export class Usuario {
     }
 
 
-    public mostrar(fecha? : String, remitente? : String): number{
-        var i = 0;
-        console.log("\nUsuario: " + this.getNombre());
-        if(fecha != undefined && remitente == undefined){
-            console.log("\t\t\t\tFiltro: " + fecha);
-            for (let numero of this.getNotificaciones()){
+    public mostrar(notificiones : Array<Notificacion>): string{
+        let stringNotificaciones = "";
+        
+        if (typeof notificiones !== 'undefined' && notificiones.length > 0){    
+            notificiones.forEach((item, index )=> {
+                stringNotificaciones = stringNotificaciones + index+1 + ") " + item.getTitulo() + " por " + item.getRemitente() + "\n";
+            });
 
-                if(numero.getFechaFormateada() == fecha /*&& numero.getVisto() != true*/){
-                    i += 1;
-                    console.log("\t\t* Notificacion n° " + i + " *");
-                    console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
-                }
-                
-            }
-            return 1;
         }
-        if(remitente != undefined && fecha == undefined){
-            console.log("\t\t\t\tFiltro: "+ remitente);
-            for (let numero of this.getNotificaciones()){
-
-                if(numero.getRemitente() == remitente /*&& numero.getVisto() != true*/){
-                    i += 1;
-                    console.log("\t\t* Notificacion n° " + i + " *");
-                    console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
-                }
-                
-            }   
-            return 2;
-        }
-        if (remitente == undefined && fecha == undefined){
-            console.log("\t\t\t\tFiltro: Sin remitente y sin fecha");
-            for (let numero of this.getNotificaciones()){
-                //if(numero.getVisto() != true){
-                
-                i += 1;
-                console.log("\t\t* Notificacion n° " + i + " *");
-                console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
-                
-                //}
-            }
-
-            return 3;
+        else {
+            stringNotificaciones = "Sin Datos";
         }
         
-        if (remitente != undefined && fecha != undefined){
-            console.log("\t\t\t\tFiltro: "+ remitente + " - " + fecha);
-            for (let numero of this.getNotificaciones()){
-                if(numero.getRemitente() == remitente && numero.getFechaFormateada() == fecha /*&& numero.getVisto() != true*/){
-                    i += 1;
-                    console.log("\t\t* Notificacion n° " + i + " *");
-                    console.log( "Fecha: " + numero.getFechaFormateada() + " | Descripción: " + numero.getDescripcion() +" | ID: "+ numero.getId() + " | Remitente: "+numero.getRemitente() +" | Titulo: "+ numero.getTitulo() +" | Visto(estado)" + numero.getVisto());
-                }
-            }
-
-            return 4;
-        }
-
-
+        return stringNotificaciones;
+        
     }
 
     public eliminar(id : number){
