@@ -194,6 +194,18 @@ describe('Usuario > Mostrar Notificaciones', () => {
         
          
      });
+
+     it('Filtrar por visto sin notificaciones', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+       
+        //comprobar que el tamaño del arreglo que devuelve el filtrar por visto sea igual a 0
+        //en el caso de que el usuario no tenga notificaiones
+        expect(usuario.filtrarVisto(usuario.getNotificaciones(),true).length).to.equal(0);
+     
+       
+        
+    });
      
 
  });
