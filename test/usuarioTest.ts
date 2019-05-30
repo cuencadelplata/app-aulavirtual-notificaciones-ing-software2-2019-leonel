@@ -121,8 +121,8 @@ describe('Usuario > Filtrar Notificaciones', () => {
         var fecha1 = moment('2016-01-01');
         var fecha2 = moment('2016-02-02');
         let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
-        let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha1, 'Julio Cesar Blanco.');
-        let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha2, 'Jose A.');
+        let notificacion2 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha1, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha2, 'Jose A.');
 
 
 
@@ -131,6 +131,16 @@ describe('Usuario > Filtrar Notificaciones', () => {
         usuario.agregarNotificacion(notificacion3);
 
         expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01').length).to.equal(2);
+        // notificaciones id 1111 y id 2222 tienen fecha 2016-01-01
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01')[0].getId()).to.equal(notificacion1.getId());
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01')[1].getId()).to.equal(notificacion2.getId());
+    });
+
+    it("Filtrar por Fecha sin notificaciones", () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01').length).to.equal(0);
     });
 
 });
