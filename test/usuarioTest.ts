@@ -115,7 +115,55 @@ describe('Usuario > Mostrar Notificaciones', () => {
 
  describe('Usuario > Filtrar Notificaciones', () => {
 
-     it('Test Filtrar por visto', () => {
+    
+    it('Filtrar por Fecha', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        var fecha1 = moment('2016-01-01');
+        var fecha2 = moment('2016-02-02');
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+        let notificacion2 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha1, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha2, 'Jose A.');
+
+
+
+        usuario.agregarNotificacion(notificacion1);
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01').length).to.equal(2);
+        // notificaciones id 1111 y id 2222 tienen fecha 2016-01-01
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01')[0].getId()).to.equal(notificacion1.getId());
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01')[1].getId()).to.equal(notificacion2.getId());
+    });
+
+    it("Filtrar por Fecha sin notificaciones", () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), '2016-01-01').length).to.equal(0);
+    });
+
+    it("Filtrar por fecha sin parametro fecha", () => {
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        var fecha1 = moment('2016-01-01');
+        var fecha2 = moment('2016-02-02');
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+        let notificacion2 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha1, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha2, 'Jose A.');
+
+        usuario.agregarNotificacion(notificacion1);
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+
+        //console.log(usuario.mostrar(usuario.filtrarFecha(usuario.getNotificaciones(), "")));
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).length).to.equal(3);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion1)).to.equal(true);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion2)).to.equal(true);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion3)).to.equal(true);
+    });
+
+     it('Filtrar por visto', () => {
 
          let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
          var fecha1 = moment('2016-01-01');
@@ -149,3 +197,5 @@ describe('Usuario > Mostrar Notificaciones', () => {
      
 
  });
+
+

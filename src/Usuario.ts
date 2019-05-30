@@ -61,7 +61,8 @@ export class Usuario {
     public filtrarFecha(arreglo: Array<Notificacion>,fecha?: String): Array<Notificacion>{
 
         var arregloFecha = arreglo;
-        if (fecha)
+        if (fecha !== undefined)
+        {
             arregloFecha.forEach((numero, index) =>{
                 if(numero.getFechaFormateada() != fecha ){
                         
@@ -69,9 +70,8 @@ export class Usuario {
 
                 }
             });
-         
+        }
         return arregloFecha;
-    
     }
     
     public filtrarTexto(arreglo: Array<Notificacion>,texto?: String): Array<Notificacion>{
