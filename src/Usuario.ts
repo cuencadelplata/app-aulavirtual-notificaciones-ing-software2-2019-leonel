@@ -58,16 +58,16 @@ export class Usuario {
 
 
 
-    public filtrarFecha(arreglo: Array<Notificacion>,fecha?: String): Array<Notificacion>{
+    public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
 
-        var arregloFecha = arreglo;
+        var arregloFecha = [];
         if (fecha !== undefined)
         {
-            arregloFecha.forEach((numero, index) =>{
-                if(numero.getFechaFormateada() != fecha ){
+            arreglo.forEach((notificacion, index) =>{
+                if(notificacion.getFechaFormateada() == fecha ){
                         
-                    arregloFecha.splice(index,1);;
-
+                    arregloFecha.push(notificacion);
+                    
                 }
             });
         }
