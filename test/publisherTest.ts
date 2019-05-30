@@ -70,7 +70,7 @@ describe("Leer RSS y enviar notificaciones", () => {
         await publisher.crearYenviarNotificacion(canal);
         expect(usuario.getNotificaciones().length).to.equal(11);
         // envio n°2
-        usuario.mostrar();
+        // usuario.mostrar();
         usuario.eliminar(74075);
         await publisher.crearYenviarNotificacion(canal);
         expect(usuario.getNotificaciones().length).to.be.equal(10);

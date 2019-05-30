@@ -32,86 +32,7 @@ describe('Usuario', () => {
 
 
     }); 
-    it('Test Filtrar por Remitente', () => {
-    
-        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
-        var fecha = moment('2016-01-01');
-        var fecha2 = moment('2016-02-02');
-        let notificacion1 = new Notificacion('Esta es un título1.','Esto es una descripción1.',1111,fecha,'Agustín Aguirre Ruíz Díaz.');
-        let notificacion3 = new Notificacion('Esta es un título3.','Esto es una descripción3.',2222,fecha2,'Agustín Aguirre Ruíz Díaz.');
-        let notificacion2 = new Notificacion('Esta es un título2.','Esto es una descripción2.',3333,fecha,'Julio Cesar Blanco.');
 
-        
-
-        usuario.agregarNotificacion(notificacion1);        
-        usuario.agregarNotificacion(notificacion2);
-        usuario.agregarNotificacion(notificacion3);
-
-        expect(usuario.getNotificaciones().length).to.equal(3);
-        expect(usuario.mostrar(null,"Agustín Aguirre Ruíz Díaz.")).to.equal(2);
-    }); 
-    it('Test Filtrar por Fecha', () => {
-    
-        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
-        var fecha1 = moment('2016-01-01');
-        var fecha2 = moment('2016-02-02');
-        let notificacion1 = new Notificacion('Esta es un título1.','Esto es una descripción1.',1111,fecha1,'Agustín Aguirre Ruíz Díaz.');
-        let notificacion3 = new Notificacion('Esta es un título3.','Esto es una descripción3.',2222,fecha1,'Julio Cesar Blanco.');
-        let notificacion2 = new Notificacion('Esta es un título2.','Esto es una descripción2.',3333,fecha2,'Jose A.');
-
-        
-
-        usuario.agregarNotificacion(notificacion1);        
-        usuario.agregarNotificacion(notificacion2);
-        usuario.agregarNotificacion(notificacion3);
-
-        expect(usuario.getNotificaciones().length).to.equal(3);
-        expect(usuario.mostrar("2016-01-01",null)).to.equal(1);
-    }); 
-    it('Test Filtrar por Fecha y Remitente', () => {
-    
-        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
-        var fecha1 = moment('2016-01-01');
-        var fecha2 = moment('2016-02-02');
-        var fecha3 = moment('2016-03-03')
-        let notificacion1 = new Notificacion('Esta es un título1.','Esto es una descripción1.',1111,fecha1,'Agustín Aguirre Ruíz Díaz.');
-        let notificacion2 = new Notificacion('Esta es un título2.','Esto es una descripción2.',2222,fecha2,'Jose A.');
-        let notificacion3 = new Notificacion('Esta es un título3.','Esto es una descripción3.',3333,fecha1,'Julio Cesar Blanco.');       
-        let notificacion4 = new Notificacion('Esta es un título4.','Esto es una descripción4.',4444,fecha3,'Julio Cesar Blanco.');
-        let notificacion5 = new Notificacion('Esta es un título5.','Esto es una descripción5.',5555,fecha1,'Julio Cesar Blanco.');
-        
-
-        usuario.agregarNotificacion(notificacion1);        
-        usuario.agregarNotificacion(notificacion2);
-        usuario.agregarNotificacion(notificacion3);
-        usuario.agregarNotificacion(notificacion4);
-        usuario.agregarNotificacion(notificacion5);
-
-        expect(usuario.getNotificaciones().length).to.equal(5);
-        expect(usuario.mostrar('2016-01-01','Julio Cesar Blanco.')).to.equal(4);
-    }); 
-    it('Test Mostrar', () => {
-    
-        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
-        var fecha1 = moment('2016-01-01');
-        var fecha2 = moment('2016-02-02');
-        var fecha3 = moment('2016-03-03')
-        let notificacion1 = new Notificacion('Esta es un título1.','Esto es una descripción1.',1111,fecha1,'Agustín Aguirre Ruíz Díaz.');
-        let notificacion2 = new Notificacion('Esta es un título2.','Esto es una descripción2.',2222,fecha2,'Jose A.');
-        let notificacion3 = new Notificacion('Esta es un título3.','Esto es una descripción3.',3333,fecha1,'Julio Cesar Blanco.');       
-        let notificacion4 = new Notificacion('Esta es un título4.','Esto es una descripción4.',4444,fecha3,'Julio Cesar Blanco.');
-        let notificacion5 = new Notificacion('Esta es un título5.','Esto es una descripción5.',5555,fecha1,'Julio Cesar Blanco.');
-
-        usuario.agregarNotificacion(notificacion1);        
-        usuario.agregarNotificacion(notificacion2);
-        usuario.agregarNotificacion(notificacion3);
-        usuario.agregarNotificacion(notificacion4);
-        usuario.agregarNotificacion(notificacion5);
-
-        expect(usuario.getNotificaciones().length).to.equal(5);
-        expect(usuario.mostrar()).to.equal(3);
-    }); 
-    
     it('Test Eliminar por ID', () => {
         
         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz',41038330);
@@ -161,3 +82,114 @@ describe('Usuario', () => {
         expect(canal.getUsuarios().length).to.equal(0);
     });
 });
+
+
+describe('Usuario > Mostrar Notificaciones', () => {
+
+    it('Test Mostrar 0 Notificaciones', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        expect(usuario.mostrar([])).to.equal('Sin Datos');
+    });
+
+    it('Test Mostrar 1 Notificacion', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        let n1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, moment('2016-01-01'), 'Agustín Aguirre Ruíz Díaz.');
+       
+        let esperado = `1) ${n1.getTitulo()} por ${n1.getRemitente()}`;
+        expect(usuario.mostrar([n1])).to.equal('1) Esta es un título1. por Agustín Aguirre Ruíz Díaz.');
+    });
+
+    it('Test Mostrar 2 Notificaciones', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        let n1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, moment('2016-01-01'), 'Agustín Aguirre Ruíz Díaz.');
+        let n2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, moment('2016-01-01'), 'Jose A.');
+
+        let esperado = `1) ${n1.getTitulo()} por ${n1.getRemitente()}\n2) ${n2.getTitulo()} por ${n2.getRemitente()}`;
+        expect(usuario.mostrar([n1, n2])).to.equal(esperado);
+    });
+});
+
+
+// describe('Usuario > Filtrar Notificaciones', () => {
+
+//     it('Test Filtrar por Texto', () => {
+
+//         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+//         var fecha = moment('2016-01-01');
+//         var fecha2 = moment('2016-02-02');
+//         let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha, 'Agustín Aguirre Ruíz Díaz.');
+//         let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha2, 'Agustín Aguirre Ruíz Díaz.');
+//         let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha, 'Julio Cesar Blanco.');
+
+//         usuario.agregarNotificacion(notificacion1);
+//         usuario.agregarNotificacion(notificacion2);
+//         usuario.agregarNotificacion(notificacion3);
+
+//         expect(usuario.filtrar(null, 'Esto es una descripción1.').length).to.equal(1);
+//     });
+//     it('Test Filtrar por Fecha', () => {
+
+//         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+//         var fecha1 = moment('2016-01-01');
+//         var fecha2 = moment('2016-02-02');
+//         let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+//         let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 2222, fecha1, 'Julio Cesar Blanco.');
+//         let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 3333, fecha2, 'Jose A.');
+
+
+
+//         usuario.agregarNotificacion(notificacion1);
+//         usuario.agregarNotificacion(notificacion2);
+//         usuario.agregarNotificacion(notificacion3);
+
+//         expect(usuario.filtrar('2016-01-01').length).to.equal(2);
+//     });
+//     it('Test Filtrar por visto', () => {
+
+//         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+//         var fecha1 = moment('2016-01-01');
+//         var fecha2 = moment('2016-02-02');
+//         var fecha3 = moment('2016-03-03')
+//         let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+//         let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha2, 'Jose A.');
+//         let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 3333, fecha1, 'Julio Cesar Blanco.');
+//         let notificacion4 = new Notificacion('Esta es un título4.', 'Esto es una descripción4.', 4444, fecha3, 'Julio Cesar Blanco.');
+//         let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha1, 'Julio Cesar Blanco.');
+
+
+//         usuario.agregarNotificacion(notificacion1);
+//         usuario.agregarNotificacion(notificacion2);
+//         usuario.agregarNotificacion(notificacion3);
+//         usuario.agregarNotificacion(notificacion4);
+//         usuario.agregarNotificacion(notificacion5);
+
+//         usuario.getNotificaciones()[0].cambiarVisto();
+
+//         expect(usuario.filtrar(null,null,true).length).to.equal(1);
+//     });
+    // it('Test filtro sin resultados', () => {
+
+    //     let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+    //     var fecha1 = moment('2016-01-01');
+    //     var fecha2 = moment('2016-02-02');
+    //     var fecha3 = moment('2016-03-03')
+    //     let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+    //     let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha2, 'Jose A.');
+    //     let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 3333, fecha1, 'Julio Cesar Blanco.');
+    //     let notificacion4 = new Notificacion('Esta es un título4.', 'Esto es una descripción4.', 4444, fecha3, 'Julio Cesar Blanco.');
+    //     let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha1, 'Julio Cesar Blanco.');
+
+
+    //     usuario.agregarNotificacion(notificacion1);
+    //     usuario.agregarNotificacion(notificacion2);
+    //     usuario.agregarNotificacion(notificacion3);
+    //     usuario.agregarNotificacion(notificacion4);
+    //     usuario.agregarNotificacion(notificacion5);
+
+    //     expect(usuario.getNotificaciones().length).to.equal(5);
+    // });
+
+// });

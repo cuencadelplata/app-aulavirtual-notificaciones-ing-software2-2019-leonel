@@ -1,7 +1,6 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
 import { Canal } from './Canal';
-import { userInfo } from 'os';
 export class Usuario {
     private nombre: String;
     private dni: number;
@@ -59,33 +58,33 @@ export class Usuario {
 
 
 
-    public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
+    public filtrarFecha(arreglo: Array<Notificacion>,fecha?: String): Array<Notificacion>{
 
         var arregloFecha = arreglo;
+        if (fecha)
+            arregloFecha.forEach((numero, index) =>{
+                if(numero.getFechaFormateada() != fecha ){
+                        
+                    arregloFecha.splice(index,1);;
 
-        arregloFecha.forEach((numero, index) =>{
-            if(numero.getFechaFormateada() != fecha ){
-                    
-                arregloFecha.splice(index,1);;
-
-            }
-        });
+                }
+            });
          
         return arregloFecha;
     
     }
     
-    public filtrarTexto(arreglo: Array<Notificacion>,texto: String): Array<Notificacion>{
+    public filtrarTexto(arreglo: Array<Notificacion>,texto?: String): Array<Notificacion>{
         
         var arregloTexto = arreglo;
+        if(texto)
+            arregloTexto.forEach((numero, index) =>{
+                if(numero.getDescripcion() != texto || numero.getRemitente() != texto || numero.getTitulo() != texto){
+                        
+                    arregloTexto.splice(index,1);;
 
-        arregloTexto.forEach((numero, index) =>{
-            if(numero.getDescripcion() != texto || numero.getRemitente() != texto || numero.getTitulo() != texto){
-                    
-                arregloTexto.splice(index,1);;
-
-            }
-        });
+                }
+            });
          
         
         
@@ -131,7 +130,8 @@ export class Usuario {
         
         if (typeof notificiones !== 'undefined' && notificiones.length > 0){    
             notificiones.forEach((item, index )=> {
-                stringNotificaciones = stringNotificaciones + index+1 + ") " + item.getTitulo() + " por " + item.getRemitente() + "\n";
+                if (index > 0) stringNotificaciones+= '\n';
+                stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo() + " por " + item.getRemitente();
             });
 
         }
