@@ -394,6 +394,39 @@ describe('Usuario > Mostrar Notificaciones', () => {
 	expect(usuario.filtrar(undefined,'Jose A.').includes(notificacion4)).to.equal(false);
 	expect(usuario.filtrar(undefined,'Jose A.').includes(notificacion5)).to.equal(false);
     });
+
+    it('Filtrar por Visto sin fecha y sin texto', () => {
+
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        let fecha1 =  moment('2016-01-01');
+        let fecha2 =  moment('2016-02-01');
+        let fecha3 =  moment('2016-03-01');
+        let fecha4 =  moment('2016-04-01');
+
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Jose A.');
+        let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha1, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 3333, fecha2, 'Jose A.');
+        let notificacion4 = new Notificacion('Esta es un título4.', 'Esto es una descripción4.', 4444, fecha3, 'Julio Cesar Blanco.');
+        let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha4, 'Cristian Ricardo Saraceni');
+
+
+
+        usuario.agregarNotificacion(notificacion1);
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+        usuario.agregarNotificacion(notificacion4);
+        usuario.agregarNotificacion(notificacion5);
+
+        usuario.getNotificaciones()[0].cambiarVisto();
+
+        expect(usuario.filtrar(undefined,undefined ,true).length).to.equal(1);
+        expect(usuario.filtrar(undefined,undefined ,true).includes(notificacion1)).to.equal(true);
+	expect(usuario.filtrar(undefined, undefined,true).includes(notificacion2)).to.equal(false);
+	expect(usuario.filtrar(undefined, undefined,true).includes(notificacion3)).to.equal(false);
+	expect(usuario.filtrar(undefined, undefined,true).includes(notificacion4)).to.equal(false);
+	expect(usuario.filtrar(undefined,undefined ,true).includes(notificacion5)).to.equal(false);
+    });
+
  });
 
 
