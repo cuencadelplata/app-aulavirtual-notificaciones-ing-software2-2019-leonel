@@ -60,9 +60,10 @@ export class Usuario {
     public mostrar(notificiones : Array<Notificacion>): string{
         let stringNotificaciones = "";
         
-        if (typeof notificiones !== 'undefined' && notificiones.length > 0){    
+        
+        if ( notificiones && notificiones.length > 0){    
             notificiones.forEach((item, index )=> {
-                stringNotificaciones = stringNotificaciones + index+1 + ") " + item.getTitulo() + " por " + item.getRemitente() + "\n";
+                stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo() + " por " + item.getRemitente() + "\n";
             });
         }
         else {
