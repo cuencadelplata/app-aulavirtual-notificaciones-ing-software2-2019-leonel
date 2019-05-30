@@ -109,11 +109,20 @@ export class Usuario {
     public filtrar(fecha? : String , texto? : String , visto? : boolean ): Array<Notificacion>{
 
         var arregloFiltrado = this.getNotificaciones();
+        
+        if (fecha!= undefined){
+            arregloFiltrado = this.filtrarFecha(arregloFiltrado,fecha);
 
+        }
+        if (texto!= undefined){
+            arregloFiltrado = this.filtrarTexto(arregloFiltrado,texto);
 
-        arregloFiltrado = this.filtrarFecha(arregloFiltrado,fecha);
-        arregloFiltrado = this.filtrarTexto(arregloFiltrado,texto);
-        arregloFiltrado = this.filtrarVisto(arregloFiltrado,visto);
+        }
+        if (visto!= undefined){
+            arregloFiltrado = this.filtrarVisto(arregloFiltrado,visto);
+
+        }
+
 
         return arregloFiltrado;
 
