@@ -61,8 +61,7 @@ export class Usuario {
     public filtrarFecha(arreglo: Array<Notificacion>,fecha?: String): Array<Notificacion>{
 
         var arregloFecha = arreglo;
-        if (fecha !== undefined)
-        {
+        if (fecha)
             arregloFecha.forEach((numero, index) =>{
                 if(numero.getFechaFormateada() != fecha ){
                         
@@ -70,8 +69,9 @@ export class Usuario {
 
                 }
             });
-        }
+         
         return arregloFecha;
+    
     }
     
     public filtrarTexto(arreglo: Array<Notificacion>,texto?: String): Array<Notificacion>{
@@ -95,7 +95,7 @@ export class Usuario {
     public filtrarVisto(arreglo: Array<Notificacion>,visto: boolean): Array<Notificacion>{
         
         var arregloVisto = [];
-        if(visto != undefined){
+      
             arreglo.forEach((numero, index) =>{
                 if(numero.getVisto() == visto ){
                         
@@ -103,7 +103,7 @@ export class Usuario {
 
                 }
             });
-        }    
+        
         return arregloVisto;
 
     }
