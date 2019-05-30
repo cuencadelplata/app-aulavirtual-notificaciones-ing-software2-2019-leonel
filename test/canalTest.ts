@@ -25,8 +25,9 @@ describe('Suscripcion a Canal', () => {
         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
         canal.subscribirse(usuario);
         expect(canal.subscribirse(usuario)).to.equal(false);
+        expect(canal.getUsuarios().length).to.equal(1);
     });
-    it('Usuario Nuevo debe tenern notificaciones de contenedorNotif', () => {
+    it('Usuario Nuevo debe tener notificaciones de contenedorNotif', () => {
         let canal = new Canal();
         canal.repartirNotificacion(new Notificacion('Titulo', 'Descripcion', 213, moment('2016-01-01'), 'Schleicher Leonel'));
         canal.repartirNotificacion(new Notificacion('Titulo2', 'Descripcion2', 2134, moment(), 'Schleicher Leonel'));
@@ -37,7 +38,7 @@ describe('Suscripcion a Canal', () => {
 
 
 });
-describe('Desuscricion del Canal', () => {
+describe('Desuscripcion del Canal', () => {
     it('Usuario se Desuscribe a Canal', () => {
         let canal = new Canal();
         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);

@@ -1,11 +1,7 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
-<<<<<<< HEAD
-export class Usuario{
-=======
 import { Canal } from './Canal';
 export class Usuario {
->>>>>>> 202a8bdb18c642d5b83eff0e854977ffb09f5af5
     private nombre: String;
     private dni: number;
     private notificaciones: Array<Notificacion>;
@@ -123,13 +119,19 @@ export class Usuario {
     public eliminar(id : number){
 
         var i;
+        var bandera = 0;
         for (i = 0; i < this.notificaciones.length; i++){
             if (this.notificaciones[i].getId() == id ){
                 this.notificaciones.splice(i,1);
+                bandera = 1;
             }
+        }
+        if (bandera == 1){
+            console.log("No existe la ID. No se eliminó ninguna notificación");
         }
 
 
     }
+
 
 }
