@@ -156,11 +156,10 @@ describe('Usuario > Mostrar Notificaciones', () => {
         usuario.agregarNotificacion(notificacion2);
         usuario.agregarNotificacion(notificacion3);
 
-        //console.log(usuario.mostrar(usuario.filtrarFecha(usuario.getNotificaciones(), "")));
-        expect(usuario.filtrarFecha(usuario.getNotificaciones()).length).to.equal(3);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion1)).to.equal(true);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion2)).to.equal(true);
-        expect(usuario.filtrarFecha(usuario.getNotificaciones()).includes(notificacion3)).to.equal(true);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").length).to.equal(0);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion1)).to.equal(false);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion2)).to.equal(false);
+        expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion3)).to.equal(false);
     });
 
      it('Filtrar por visto', () => {

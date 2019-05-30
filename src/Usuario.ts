@@ -58,35 +58,33 @@ export class Usuario {
 
 
 
-    public filtrarFecha(arreglo: Array<Notificacion>,fecha?: String): Array<Notificacion>{
+    public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
 
-        var arregloFecha = arreglo;
-        if (fecha)
-            arregloFecha.forEach((numero, index) =>{
-                if(numero.getFechaFormateada() != fecha ){
+        var arregloFecha = [];
+        if (fecha != undefined)
+        {
+            arreglo.forEach((notificacion) =>{
+                if(notificacion.getFechaFormateada() == fecha ){
                         
-                    arregloFecha.splice(index,1);;
+                    arregloFecha.push(notificacion);
 
                 }
             });
-         
+        }
         return arregloFecha;
     
     }
     
-    public filtrarTexto(arreglo: Array<Notificacion>,texto?: String): Array<Notificacion>{
+    public filtrarTexto(arreglo: Array<Notificacion>,texto: String): Array<Notificacion>{
         
-        var arregloTexto = arreglo;
-        if(texto)
-            arregloTexto.forEach((numero, index) =>{
-                if(numero.getDescripcion() != texto || numero.getRemitente() != texto || numero.getTitulo() != texto){
+        var arregloTexto = [];
+        arreglo.forEach((numero, index) =>{
+            if(numero.getDescripcion() == texto || numero.getRemitente() == texto || numero.getTitulo() == texto){
                         
-                    arregloTexto.splice(index,1);;
+                arregloTexto.push(numero);
 
-                }
-            });
-         
-        
+            }
+        });
         
         return arregloTexto;
 
