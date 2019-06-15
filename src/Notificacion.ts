@@ -7,6 +7,7 @@ export class Notificacion{
     private fecha: moment.Moment;
     private visto: boolean;
     private remitente: String;
+    private favorito: boolean;
 
     constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String){
        
@@ -16,7 +17,7 @@ export class Notificacion{
         this.setFecha(fecha);
         this.setVisto(false);
         this.setRemitente(remitente);
-        
+        this.setFavorito(false);
     }
 
     private setTitulo (titulo : String) {
@@ -67,6 +68,14 @@ export class Notificacion{
         return this.remitente;
     }
 
+    private setFavorito(favorito : boolean) {
+        this.favorito = favorito;
+    }
+     
+    public getFavorito() : boolean {
+        return this.favorito;
+    }
+
     public cambiarVisto() {
         
         this.setVisto (!this.getVisto());
@@ -79,7 +88,11 @@ export class Notificacion{
     
     }
 
-
+    public marcarFavorito(){
+        
+        this.setFavorito(!this.getFavorito());
+    
+    }
     
 
 

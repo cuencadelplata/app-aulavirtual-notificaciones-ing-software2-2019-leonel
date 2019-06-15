@@ -49,5 +49,15 @@ describe('Notificacion', () => {
          
       });
     
+      it('Test Favorito', () => {
+    
+        var fecha = moment('2016-01-01');
+        let notificacion = new Notificacion('Titulo','Descripcion',12345,fecha,'Cristian');
+        
+        notificacion.marcarFavorito();
+        
+        expect(notificacion.getFavorito()).to.equal(true);
+          
+      });  
 });
 
