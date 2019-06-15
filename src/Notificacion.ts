@@ -7,6 +7,7 @@ export class Notificacion{
     private fecha: moment.Moment;
     private visto: boolean;
     private remitente: String;
+    private importante: boolean;
 
     constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String){
        
@@ -16,6 +17,7 @@ export class Notificacion{
         this.setFecha(fecha);
         this.setVisto(false);
         this.setRemitente(remitente);
+        this.setImportante(false);
         
     }
 
@@ -79,8 +81,17 @@ export class Notificacion{
     
     }
 
+    private setImportante(esImportante: boolean) {
+        this.importante = esImportante;
+    }
 
+    public getImportante(): boolean {
+        return this.importante;
+    }
     
+    public cambiarImportante(){
+        this.setImportante(!this.getImportante());
+    }
 
 
 

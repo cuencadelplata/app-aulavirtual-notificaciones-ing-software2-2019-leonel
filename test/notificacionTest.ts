@@ -49,5 +49,24 @@ describe('Notificacion', () => {
          
       });
     
+  it('Test Marcar Importante', () => {
+
+    let notificacion = new Notificacion('Titulo', 'Descripcion', 12345, moment(), 'Cristian');
+
+    notificacion.cambiarImportante();
+
+    expect(notificacion.getImportante()).to.equal(true);
+
+  });
+  it('Test Marcar No Importante', () => {
+
+    let notificacion = new Notificacion('Titulo', 'Descripcion', 12345, moment(), 'Cristian');
+
+    notificacion.cambiarImportante();
+    notificacion.cambiarImportante();
+
+    expect(notificacion.getImportante()).to.equal(false);
+
+  }); 
 });
 
