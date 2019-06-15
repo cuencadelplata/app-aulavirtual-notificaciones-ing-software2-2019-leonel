@@ -1,7 +1,8 @@
 import { Notificacion } from './Notificacion';
 import moment = require('moment');
 import { Canal } from './Canal';
-export class Usuario {
+import { IUsuario } from './IUsuario';
+export class Usuario implements IUsuario{
     private nombre: String;
     private dni: number;
     private notificaciones: Array<Notificacion>;
@@ -136,7 +137,7 @@ export class Usuario {
         if ( notificiones && notificiones.length > 0){    
             notificiones.forEach((item, index )=> {
                 if (index > 0) stringNotificaciones+= '\n';
-                stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo() + " por " + item.getRemitente();
+                stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo()  + " - por " + item.getRemitente() + ", el "+ item.getFechaFormateada()+ "\n      " + item.getDescripcion();
             });
 
         }
@@ -147,7 +148,11 @@ export class Usuario {
         return stringNotificaciones;
         
     }
+    public imprimir(): void{
+        let impresion = this.mostrar(this.getNotificaciones());
+        console.log(impresion);
 
+    }
     public eliminar(id : number){
 
         var i;
