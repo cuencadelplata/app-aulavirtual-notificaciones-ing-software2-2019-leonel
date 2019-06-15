@@ -458,6 +458,11 @@ describe('Usuario > Mostrar Notificaciones', () => {
 	expect(usuario.filtrar().includes(notificacion5)).to.equal(true);
     });
 
+   
+ });
+
+ describe('Usuario > notificaciones', () => {
+
     it('Marcar todas como no leidas', () => {
 
         let usuario = new Usuario('Schleicher', 41038330);
@@ -491,6 +496,32 @@ describe('Usuario > Mostrar Notificaciones', () => {
     
     });
 
- });
+    it('comparte notificacion', () => {
+
+        let usuario = new Usuario('Schleicher', 41038330);
+        let usuario1 = new Usuario('Augusto', 41038330);
+        let usuario2 = new Usuario('Cristian', 41038330);
+        let usuario3 = new Usuario('Agustin', 41038330);
+        let fecha1 =  moment('2016-01-01');
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'lolo');
+        usuario.agregarNotificacion(notificacion1);
+        let list = new Array<Usuario>();
+        list.push(usuario1);
+        list.push(usuario2);
+        list.push(usuario3);  
+        
+    
+        usuario.compartirNotif(notificacion1, list);
+        
+        expect(usuario1.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");
+        expect(usuario2.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");
+        expect(usuario3.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");
+
+        
+    
+    });
 
 
+
+
+});

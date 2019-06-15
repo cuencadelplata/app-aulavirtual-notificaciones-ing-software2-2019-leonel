@@ -173,5 +173,13 @@ export class Usuario {
         });
     }
 
+    public compartirNotif(notif: Notificacion, usuarios: Array<Usuario>){
+        usuarios.forEach((item, index) => {
+            item.agregarNotificacion(notif);
+        });
+    }
+
+    
+
 
 }
