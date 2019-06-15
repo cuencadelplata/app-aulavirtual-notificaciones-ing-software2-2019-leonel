@@ -7,6 +7,7 @@ export class Notificacion{
     private fecha: moment.Moment;
     private visto: boolean;
     private remitente: String;
+    
 
     constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String){
        

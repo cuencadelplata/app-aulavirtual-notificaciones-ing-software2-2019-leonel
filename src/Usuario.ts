@@ -165,5 +165,13 @@ export class Usuario {
 
     }
 
+    public marcarNoLeidas(){
+        this.notificaciones.forEach((item,index) => {
+            if(item.getVisto() == true){
+                item.cambiarVisto();
+            }
+        });
+    }
+
 
 }

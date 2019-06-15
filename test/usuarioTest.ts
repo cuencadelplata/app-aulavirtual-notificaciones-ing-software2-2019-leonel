@@ -458,6 +458,39 @@ describe('Usuario > Mostrar Notificaciones', () => {
 	expect(usuario.filtrar().includes(notificacion5)).to.equal(true);
     });
 
+    it('Marcar todas como no leidas', () => {
+
+        let usuario = new Usuario('Schleicher', 41038330);
+        let fecha1 =  moment('2016-01-01');
+        let fecha2 =  moment('2016-02-01');
+        let fecha3 =  moment('2016-03-01');
+        let fecha4 =  moment('2016-04-01');
+
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'lolo');
+        let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha1, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 3333, fecha2, 'cris');
+        let notificacion4 = new Notificacion('Esta es un título4.', 'Esto es una descripción4.', 4444, fecha3, 'agus');
+        let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha4, 'Cristian Ricardo Saraceni');
+
+
+
+        usuario.agregarNotificacion(notificacion1);
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+        usuario.agregarNotificacion(notificacion4);
+        usuario.agregarNotificacion(notificacion5);
+
+        usuario.marcarNoLeidas();
+        
+        expect(usuario.getNotificaciones()[0].getVisto()).to.equal(false);
+        expect(usuario.getNotificaciones()[1].getVisto()).to.equal(false);
+        expect(usuario.getNotificaciones()[2].getVisto()).to.equal(false);
+        expect(usuario.getNotificaciones()[3].getVisto()).to.equal(false);
+        expect(usuario.getNotificaciones()[4].getVisto()).to.equal(false);
+        
+    
+    });
+
  });
 
 
