@@ -58,7 +58,20 @@ export class Usuario implements IUsuario{
     }
 
 
+    public filtrarRangoFecha(fecha1: moment.Moment, fecha2: moment.Moment):Array<Notificacion>{
 
+        var arregloRangoFecha = [];
+
+        this.getNotificaciones().forEach((notificacion) =>{
+            
+            if(notificacion.getFecha()>=fecha1 && notificacion.getFecha()<=fecha2){
+                    
+                arregloRangoFecha.push(notificacion);
+
+            }
+        });
+        return arregloRangoFecha;
+    }
     public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
 
         var arregloFecha = [];
