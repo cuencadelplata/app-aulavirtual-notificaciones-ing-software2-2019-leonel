@@ -165,5 +165,21 @@ export class Usuario {
 
     }
 
+    public marcarNoLeidas(){
+        this.notificaciones.forEach((item,index) => {
+            if(item.getVisto() == true){
+                item.cambiarVisto();
+            }
+        });
+    }
+
+    public compartirNotif(notif: Notificacion, usuarios: Array<Usuario>){
+        usuarios.forEach((item, index) => {
+            item.agregarNotificacion(notif);
+        });
+    }
+
+    
+
 
 }
