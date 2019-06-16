@@ -458,6 +458,28 @@ describe('Usuario > Mostrar Notificaciones', () => {
 	expect(usuario.filtrar().includes(notificacion5)).to.equal(true);
     });
 
- });
+    it('Obtener ultimos 10 notificaciones marcados como favoritos', () => {
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        var i;
+        let fecha =  moment('2016-01-01');
+
+        for (i=1;i<15;i++){ 
+            let notificacion = new Notificacion('Titulo','Descripcion',12345,fecha,'Cristian');
+ 
+            usuario.agregarNotificacion(notificacion);
+
+            notificacion.marcarFavorito();
+            
+        } 
+        expect(usuario.obtenerTopDiezNotificaciones().length).to.equal(10);
+
+
+    });
+        
+        
+              
+        });  
+
+ 
 
 

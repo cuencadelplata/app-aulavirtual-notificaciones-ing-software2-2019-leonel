@@ -56,7 +56,7 @@ describe('Notificacion', () => {
         
         notificacion.marcarFavorito();
         
-        expect(notificacion.getFavorito()).to.equal(true);
+        expect(notificacion.getFechaFav()).not.null;
           
       });  
 });

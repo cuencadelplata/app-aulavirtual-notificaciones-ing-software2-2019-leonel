@@ -165,5 +165,49 @@ export class Usuario {
 
     }
 
+  /*  public obtenerTopDiezNotificaciones(arreglo: Array<Notificacion>,favorito: boolean): Array<Notificacion>{
+        
+        var arregloFavorito = [];
+      
+            arreglo.forEach((numero, index) =>{
+                if(numero.getFavorito() == favorito ){
+                        
+                    arregloFavorito.push(numero);;
 
+                }
+            });
+        
+        return arregloFavorito;
+
+    }
+    */
+    public obtenerTopDiezNotificaciones(){
+        var arregloFav = [];
+        var i= 0;
+        var j= 0;
+        var aux = 0;
+        var n = 0
+        this.notificaciones.forEach((item, index)=>{
+
+            if(item.getFechaFav()!= null){
+
+                arregloFav.push(item);
+
+            }
+        }); 
+        for (i=0;i<n;i++){ 
+            for (j=0;j<n-i;j++){ 
+                if (arregloFav[j].getFechaFav()>=arregloFav[j+1].getFechafav()){ 
+                    aux=arregloFav[j]; 
+                    arregloFav[j]=arregloFav[j+1]; 
+                    arregloFav[j+1]=aux; 
+                } 
+
+            } 
+
+        }
+        var topDiez = arregloFav.slice(-10);
+        return topDiez;
+
+    }
 }
