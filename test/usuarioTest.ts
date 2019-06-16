@@ -521,7 +521,36 @@ describe('Usuario > Mostrar Notificaciones', () => {
     
     });
 
+     it("Test enviar mensaje desde Usuario hacia Grupo", () => {
+         let usuario = new Usuario("Schleicher", 41038330);
+         let usuario1 = new Usuario("Augusto", 41038330);
+         let usuario2 = new Usuario("Cristian", 41038330);
+         let usuario3 = new Usuario("Agustin", 41038330);
+         let fecha1 = moment("2016-01-01");
+         let notificacion1 = new Notificacion(
+             "Esta es un título1.",
+             "Esto es una descripción1.",
+             123,
+             fecha1,
+             "lolo"
+         );
+         usuario.agregarNotificacion(notificacion1);
+         let list = new Array<Usuario>();
+         list.push(usuario1);
+         list.push(usuario2);
+         list.push(usuario3);
+         usuario.compartirNotif(notificacion1, list);
 
+         usuario.enviarMensaje(123,"Hola Mundo!");
+        //  usuario.getGrupos()[0].getUsuarios().forEach(u =>{
+        //      expect(u.getGrupos()[0].getMensajes()[0]).to.equal("Hola mundo!");
+
+        //  });
+         expect(usuario.getGrupos()[0].getMensajes()[0]).to.equal("Hola Mundo!");
+         expect(usuario1.getGrupos()[0].getMensajes()[0]).to.equal("Hola Mundo!");
+         expect(usuario2.getGrupos()[0].getMensajes()[0]).to.equal("Hola Mundo!");
+         expect(usuario3.getGrupos()[0].getMensajes()[0]).to.equal("Hola Mundo!");
+     });
 
 
 });
