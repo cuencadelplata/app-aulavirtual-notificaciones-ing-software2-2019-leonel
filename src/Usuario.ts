@@ -202,6 +202,55 @@ export class Usuario implements IUsuario {
     });
   }
 
+  
+    public obtenerTopDiezNotificaciones(){
+        var arregloFav = [];
+        var i= 0;
+        var j= 0;
+        var aux = 0;
+        var n = 0
+        this.notificaciones.forEach((item, index)=>{
+
+            if(item.getFechaFav()!= null){
+
+                arregloFav.push(item);
+
+            }
+        }); 
+        for (i=0;i<n;i++){ 
+            for (j=0;j<n-i;j++){ 
+                if (arregloFav[j].getFechaFav()>=arregloFav[j+1].getFechafav()){ 
+                    aux=arregloFav[j]; 
+                    arregloFav[j]=arregloFav[j+1]; 
+                    arregloFav[j+1]=aux; 
+                } 
+
+            } 
+
+        }
+        var topDiez = arregloFav.slice(-10);
+        return topDiez;
+
+    }
+
+    public xportToCsv(notificacionesFiltradas): String{
+       
+        let CSV = "";
+
+        notificacionesFiltradas.forEach(n => {
+
+            CSV += n.getTitulo() + '; ';
+            CSV += n.getDescripcion() + '; ';
+            CSV += n.getId() + '; ';
+            CSV += n.getFechaFormateada() + '; ';
+            CSV += n.getRemitente();
+            CSV += '\n'
+           
+        });
+
+        return CSV;
+    }
+
   public asignarGrupo(grupo: Grupo): boolean {
     let existeNotif = false;
     this.getGrupos().forEach(g => {

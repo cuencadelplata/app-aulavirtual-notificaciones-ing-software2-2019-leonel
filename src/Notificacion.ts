@@ -7,6 +7,7 @@ export class Notificacion{
     private fecha: moment.Moment;
     private visto: boolean;
     private remitente: String;
+    private fechaFav: moment.Moment;
     private importante: boolean;
 
     constructor(titulo: String, descripcion: String, id: number, fecha: moment.Moment, remitente: String){
@@ -17,6 +18,7 @@ export class Notificacion{
         this.setFecha(fecha);
         this.setVisto(false);
         this.setRemitente(remitente);
+        this.setFechaFav(null);
         this.setImportante(false);
         
     }
@@ -69,6 +71,14 @@ export class Notificacion{
         return this.remitente;
     }
 
+    private setFechaFav (fechaFav : moment.Moment) {
+        this.fechaFav = fechaFav;
+    }
+     
+    public getFechaFav() : moment.Moment {
+        return this.fechaFav;
+    }
+
     public cambiarVisto() {
         
         this.setVisto (!this.getVisto());
@@ -81,14 +91,27 @@ export class Notificacion{
     
     }
 
-    private setImportante(esImportante: boolean) {
-        this.importante = esImportante;
-    }
+    public marcarFavorito(){
+        
+        
+        if (this.fechaFav == null){
 
-    public getImportante(): boolean {
-        return this.importante;
-    }
-    
+            this.fechaFav = moment();
+
+        }
+        else{
+            this.fechaFav = null;
+        }
+	}
+
+	private setImportante(esImportante: boolean) {
+		this.importante = esImportante;
+	}
+
+	public getImportante(): boolean {
+		return this.importante;
+	}
+
     public cambiarImportante(){
         this.setImportante(!this.getImportante());
     }

@@ -68,5 +68,15 @@ describe('Notificacion', () => {
     expect(notificacion.getImportante()).to.equal(false);
 
   }); 
+      it('Test Favorito', () => {
+    
+        var fecha = moment('2016-01-01');
+        let notificacion = new Notificacion('Titulo','Descripcion',12345,fecha,'Cristian');
+        
+        notificacion.marcarFavorito();
+        
+        expect(notificacion.getFechaFav()).not.null;
+          
+      });  
 });
 
