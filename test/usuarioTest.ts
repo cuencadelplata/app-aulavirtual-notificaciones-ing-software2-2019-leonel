@@ -1,5 +1,6 @@
 import { Notificacion } from '../src/Notificacion';
 import { Usuario } from '../src/Usuario';
+import { UsuarioMock } from '../src/UsuarioMock';
 import { expect } from 'chai';
 import moment = require("moment");
 import { Canal } from '../src/Canal';
@@ -97,8 +98,8 @@ describe('Usuario > Mostrar Notificaciones', () => {
         let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
         let n1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, moment('2016-01-01'), 'Agustín Aguirre Ruíz Díaz.');
        
-        let esperado = `1) ${n1.getTitulo()} por ${n1.getRemitente()}`;
-        expect(usuario.mostrar([n1])).to.equal('1) Esta es un título1. por Agustín Aguirre Ruíz Díaz.');
+        let esperado = `1) ${n1.getTitulo()} - por ${n1.getRemitente()}, el ${n1.getFechaFormateada()}\n      ${n1.getDescripcion()}`;
+        expect(usuario.mostrar([n1])).to.equal('1) Esta es un título1. - por Agustín Aguirre Ruíz Díaz., el 2016-01-01\n      Esto es una descripción1.');
     });
 
     it('Test Mostrar 2 Notificaciones', () => {
@@ -107,8 +108,22 @@ describe('Usuario > Mostrar Notificaciones', () => {
         let n1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, moment('2016-01-01'), 'Agustín Aguirre Ruíz Díaz.');
         let n2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, moment('2016-01-01'), 'Jose A.');
 
-        let esperado = `1) ${n1.getTitulo()} por ${n1.getRemitente()}\n2) ${n2.getTitulo()} por ${n2.getRemitente()}`;
+        let esperado = `1) ${n1.getTitulo()} - por ${n1.getRemitente()}, el ${n1.getFechaFormateada()}\n      ${n1.getDescripcion()}\n2) ${n2.getTitulo()} - por ${n2.getRemitente()}, el ${n2.getFechaFormateada()}\n      ${n2.getDescripcion()}`;
         expect(usuario.mostrar([n1, n2])).to.equal(esperado);
+    });
+    it('Test imprimir', () => {
+
+        let usuario = new UsuarioMock('Agustín Aguirre Ruíz Díaz', 41038330);
+        let usuario1 = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        let n1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, moment('2016-01-01'), 'Agustín Aguirre Ruíz Díaz.');
+        let n2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, moment('2016-01-01'), 'Jose A.');
+        usuario.agregarNotificacion(n1);
+        usuario.agregarNotificacion(n2);
+        usuario1.agregarNotificacion(n1);
+        usuario1.agregarNotificacion(n2);
+        expect(usuario.imprimir()).to.equal(1);
+        usuario1.imprimir();
+        
     });
 });
 
@@ -161,7 +176,36 @@ describe('Usuario > Mostrar Notificaciones', () => {
         expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion2)).to.equal(false);
         expect(usuario.filtrarFecha(usuario.getNotificaciones(), "").includes(notificacion3)).to.equal(false);
     });
+    it("Filtrar por rango de fecha", () => {
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        var fecha1 = moment('2016-01-01');
+        var fecha2 = moment('2016-01-02');
+        var fecha3 = moment('2016-01-03');
+        var fecha4 = moment('2016-01-04');
+        var fecha5 = moment('2019-05-04');
 
+        var fechaInicio = moment('2015-01-01');
+        var fechaFin = moment('2018-01-01');
+
+        let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
+        let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha2, 'Julio Cesar Blanco.');
+        let notificacion3 = new Notificacion('Esta es un título3.', 'Esto es una descripción3.', 3333, fecha3, 'Jose A.');
+        let notificacion4 = new Notificacion('Esta es un título4.', 'Esto es una descripción4.', 4444, fecha4, 'Jose A.');
+        let notificacion5 = new Notificacion('Esta es un título5.', 'Esto es una descripción5.', 5555, fecha5, 'Jose A.');
+        let notificacion6 = new Notificacion('Esta es un título6.', 'Esto es una descripción6.', 6666, fecha5, 'Jose A.');
+
+        usuario.agregarNotificacion(notificacion1);
+        usuario.agregarNotificacion(notificacion2);
+        usuario.agregarNotificacion(notificacion3);
+        usuario.agregarNotificacion(notificacion4);
+        usuario.agregarNotificacion(notificacion5);
+        usuario.agregarNotificacion(notificacion6);
+        
+        expect(usuario.getNotificaciones().length).to.equal(6);
+        expect(usuario.filtrarRangoFecha(fechaInicio, fechaFin).length).to.equal(4);
+        
+
+    });
      it('Filtrar por visto', () => {
 
          let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
