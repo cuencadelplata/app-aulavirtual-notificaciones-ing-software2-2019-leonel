@@ -2,8 +2,9 @@ import { Notificacion } from "./Notificacion";
 import moment = require("moment");
 import { Canal } from "./Canal";
 import { Grupo } from "./Grupo";
+import { IUsuario } from "./IUsuario";
 
-export class Usuario {
+export class Usuario implements IUsuario {
   private nombre: String;
   private dni: number;
   private notificaciones: Array<Notificacion>;
@@ -59,53 +60,68 @@ export class Usuario {
     canal.desuscribirse(this);
   }
 
-  public filtrarFecha(
-    arreglo: Array<Notificacion>,
-    fecha: String
-  ): Array<Notificacion> {
-    var arregloFecha = [];
-    if (fecha != undefined) {
-      arreglo.forEach(notificacion => {
-        if (notificacion.getFechaFormateada() == fecha) {
-          arregloFecha.push(notificacion);
-        }
-      });
+
+    public filtrarRangoFecha(fecha1: moment.Moment, fecha2: moment.Moment):Array<Notificacion>{
+
+        var arregloRangoFecha = [];
+
+        this.getNotificaciones().forEach((notificacion) =>{
+            
+            if(notificacion.getFecha()>=fecha1 && notificacion.getFecha()<=fecha2){
+                    
+                arregloRangoFecha.push(notificacion);
+
+            }
+        });
+        return arregloRangoFecha;
     }
-    return arregloFecha;
-  }
+    public filtrarFecha(arreglo: Array<Notificacion>,fecha: String): Array<Notificacion>{
 
-  public filtrarTexto(
-    arreglo: Array<Notificacion>,
-    texto: String
-  ): Array<Notificacion> {
-    var arregloTexto = [];
-    arreglo.forEach((numero, index) => {
-      if (
-        numero.getDescripcion() == texto ||
-        numero.getRemitente() == texto ||
-        numero.getTitulo() == texto
-      ) {
-        arregloTexto.push(numero);
-      }
-    });
+        var arregloFecha = [];
+        if (fecha != undefined)
+        {
+            arreglo.forEach((notificacion) =>{
+                if(notificacion.getFechaFormateada() == fecha ){
+                        
+                    arregloFecha.push(notificacion);
 
-    return arregloTexto;
-  }
+                }
+            });
+        }
+        return arregloFecha;
+    
+    }
+    
+    public filtrarTexto(arreglo: Array<Notificacion>,texto: String): Array<Notificacion>{
+        
+        var arregloTexto = [];
+        arreglo.forEach((numero, index) =>{
+            if(numero.getDescripcion() == texto || numero.getRemitente() == texto || numero.getTitulo() == texto){
+                        
+                arregloTexto.push(numero);
 
-  public filtrarVisto(
-    arreglo: Array<Notificacion>,
-    visto: boolean
-  ): Array<Notificacion> {
-    var arregloVisto = [];
+            }
+        });
+        
+        return arregloTexto;
 
-    arreglo.forEach((numero, index) => {
-      if (numero.getVisto() == visto) {
-        arregloVisto.push(numero);
-      }
-    });
+    }
+    
+    public filtrarVisto(arreglo: Array<Notificacion>,visto: boolean): Array<Notificacion>{
+        
+        var arregloVisto = [];
+      
+            arreglo.forEach((numero, index) =>{
+                if(numero.getVisto() == visto ){
+                        
+                    arregloVisto.push(numero);;
 
-    return arregloVisto;
-  }
+                }
+            });
+        
+        return arregloVisto;
+
+    }
 
   public filtrar(
     fecha?: String,
@@ -124,31 +140,36 @@ export class Usuario {
       arregloFiltrado = this.filtrarVisto(arregloFiltrado, visto);
     }
 
-    return arregloFiltrado;
-  }
 
-  public mostrar(notificiones: Array<Notificacion>): string {
-    let stringNotificaciones = "";
+        return arregloFiltrado;
 
-    if (notificiones && notificiones.length > 0) {
-      notificiones.forEach((item, index) => {
-        if (index > 0) stringNotificaciones += "\n";
-        stringNotificaciones =
-          stringNotificaciones +
-          (index + 1) +
-          ") " +
-          item.getTitulo() +
-          " por " +
-          item.getRemitente();
-      });
-    } else {
-      stringNotificaciones = "Sin Datos";
     }
 
-    return stringNotificaciones;
-  }
 
-  public eliminar(id: number) {
+    public mostrar(notificiones : Array<Notificacion>): string{
+        let stringNotificaciones = "";
+        
+        
+        if ( notificiones && notificiones.length > 0){    
+            notificiones.forEach((item, index )=> {
+                if (index > 0) stringNotificaciones+= '\n';
+                stringNotificaciones = stringNotificaciones + (index+1) + ") " + item.getTitulo()  + " - por " + item.getRemitente() + ", el "+ item.getFechaFormateada()+ "\n      " + item.getDescripcion();
+            });
+
+        }
+        else {
+            stringNotificaciones = "Sin Datos";
+        }
+        
+        return stringNotificaciones;
+        
+    }
+    public imprimir(): void{
+        let impresion = this.mostrar(this.getNotificaciones());
+        console.log(impresion);
+
+    }
+    public eliminar(id: number) {
     var i;
     var bandera = 0;
     for (i = 0; i < this.notificaciones.length; i++) {
