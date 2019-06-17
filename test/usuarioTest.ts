@@ -476,9 +476,31 @@ describe('Usuario > Mostrar Notificaciones', () => {
 
     });
         
+    it('Exportar notificacion filtrada a CSV ', () => {
         
+        let CSV = "";
+        let usuario = new Usuario('Saraceni Cristian Ricardo', 34734613);
+        let notificaciones=[];
+        let i;
+        let fecha =  moment('2016-01-01');
+
+        for (i=1;i<15;i++){ 
+            let notificacion = new Notificacion('Titulo','Descripcion',i,fecha,'Cristian');
+            notificaciones.push(notificacion);
+
+            
+        } 
+
+        let csv = usuario.xportToCsv(notificaciones);
+        csv.includes("Titulo; Descripcion; 4; 2016-01-01; Cristian");
+        expect(csv.includes("Titulo; Descripcion; 4; 2016-01-01; Cristian")).to.equal(true);
+
+        });
+
+
+    });
               
-        });  
+    
 
  
 

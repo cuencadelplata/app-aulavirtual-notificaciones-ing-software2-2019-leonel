@@ -165,22 +165,7 @@ export class Usuario {
 
     }
 
-  /*  public obtenerTopDiezNotificaciones(arreglo: Array<Notificacion>,favorito: boolean): Array<Notificacion>{
-        
-        var arregloFavorito = [];
-      
-            arreglo.forEach((numero, index) =>{
-                if(numero.getFavorito() == favorito ){
-                        
-                    arregloFavorito.push(numero);;
-
-                }
-            });
-        
-        return arregloFavorito;
-
-    }
-    */
+  
     public obtenerTopDiezNotificaciones(){
         var arregloFav = [];
         var i= 0;
@@ -210,4 +195,23 @@ export class Usuario {
         return topDiez;
 
     }
+
+    public xportToCsv(notificacionesFiltradas): String{
+       
+        let CSV = "";
+
+        notificacionesFiltradas.forEach(n => {
+
+            CSV += n.getTitulo() + '; ';
+            CSV += n.getDescripcion() + '; ';
+            CSV += n.getId() + '; ';
+            CSV += n.getFechaFormateada() + '; ';
+            CSV += n.getRemitente();
+            CSV += '\n'
+           
+        });
+
+        return CSV;
+    }
+
 }
