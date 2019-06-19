@@ -185,7 +185,7 @@ describe('Usuario > Mostrar Notificaciones', () => {
         var fecha5 = moment('2019-05-04');
 
         var fechaInicio = moment('2015-01-01');
-        var fechaFin = moment('2018-01-01');
+        var fechaFin = moment('2016-01-04');
 
         let notificacion1 = new Notificacion('Esta es un título1.', 'Esto es una descripción1.', 1111, fecha1, 'Agustín Aguirre Ruíz Díaz.');
         let notificacion2 = new Notificacion('Esta es un título2.', 'Esto es una descripción2.', 2222, fecha2, 'Julio Cesar Blanco.');
@@ -519,7 +519,30 @@ describe('Usuario > Mostrar Notificaciones', () => {
 
 
     });
-        
+    it('Obtener ultimos 2 notificaciones marcados como favoritos', () => {
+        let usuario = new Usuario('Agustín Aguirre Ruíz Díaz', 41038330);
+        var i;
+        let fecha =  moment('2016-01-01');
+
+        for (i=1;i<=15;i++){ 
+            let notificacion = new Notificacion('Titulo ' +i ,'Descripcion',12345,fecha,'Cristian');
+ 
+            usuario.agregarNotificacion(notificacion);
+
+            
+        }
+        usuario.getNotificaciones()[0].marcarFavorito();
+        usuario.getNotificaciones()[14].marcarFavorito();
+
+        expect(usuario.obtenerTopDiezNotificaciones().length).to.equal(2);
+        expect(usuario.obtenerTopDiezNotificaciones()[0].getTitulo()).to.equal('Titulo 1');
+        expect(usuario.obtenerTopDiezNotificaciones()[1].getTitulo()).to.equal('Titulo 15');
+
+
+
+
+    });
+
     it('Exportar notificacion filtrada a CSV ', () => {
         
         let CSV = "";
@@ -568,6 +591,9 @@ describe('Usuario > Mostrar Notificaciones', () => {
         usuario.agregarNotificacion(notificacion4);
         usuario.agregarNotificacion(notificacion5);
 
+        notificacion1.cambiarVisto();
+        expect(usuario.getNotificaciones()[0].getVisto()).to.equal(true);
+
         usuario.marcarNoLeidas();
         
         expect(usuario.getNotificaciones()[0].getVisto()).to.equal(false);
@@ -596,6 +622,7 @@ describe('Usuario > Mostrar Notificaciones', () => {
     
         usuario.compartirNotif(notificacion1, list);
         
+        expect(usuario.getNotificaciones().length).to.equal(1);
         expect(usuario1.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");
         expect(usuario2.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");
         expect(usuario3.getNotificaciones()[0].getTitulo()).to.equal("Esta es un título1.");

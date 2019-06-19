@@ -196,9 +196,11 @@ export class Usuario implements IUsuario {
     usuariosGrupo.push(this);
     var grupo = new Grupo(notif, usuariosGrupo);
     this.asignarGrupo(grupo);
-    usuarios.forEach((item, index) => {
-      item.agregarNotificacion(notif);
-      item.asignarGrupo(grupo);
+    usuarios.forEach((u, index) => {
+      if(u != this){
+        u.agregarNotificacion(notif);
+      }
+      u.asignarGrupo(grupo);
     });
   }
 
